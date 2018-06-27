@@ -1,54 +1,31 @@
 import React from 'react'
 
-import {getChuckNorris} from '../apiClient'
-import {getGiphy} from '../apiClient'
-import {getNoMemes} from '../apiClient'
-
-import request from 'superagent'
-
+import {getFruits} from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      facts: [],
-      gif: null,
-      meme: null
-
+      fruits: []
     }
   }
 
   componentDidMount () {
-    getChuckNorris()
-      .then(facts => {
-        this.setState({facts})
+    getFruits()
+      .then(fruits => {
+        this.setState({fruits})
       })
-    getGiphy()
-      .then(gif => {
-        this.setState({gif: gif.data.images.original.url})
-      })
-    getNoMemes()
-    .then(gif => {
-      this.setState({meme})
-    })
   }
- 
-
 
   render () {
-  
     return (
       <div className='app'>
-        <h1>Norris, Chuck</h1>
-        
-         <p>{this.state.facts.value}</p>
-         
-        <img src={this.state.gif} />
-
-        <img src={this.state.meme} />
-
-
-      
+        <h1>Fullstack Boilerplate</h1>
+        <ul>
+          {this.state.fruits.map(fruit => (
+            <li key={fruit}>{fruit}</li>
+          ))}
+        </ul>
       </div>
     )
   }
