@@ -8,10 +8,22 @@ function getUsers () {
 }
 
 function getUser (name) {
-  return db('users').select().where({name})
+  return db('users').select().where({name}).first()
+}
+
+function getUserData (name) {
+  let userData = {}
+  return getUser(name)
+    .then((userInfo) => {
+      userData = userInfo
+      console.log(userData)
+      // next step do db call to relationships table to get relevant stuff
+      // then return completed userData object
+    })
 }
 
 module.exports = {
   getUsers,
-  getUser
+  getUser,
+  getUserData
 }
