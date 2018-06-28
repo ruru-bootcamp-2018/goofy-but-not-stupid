@@ -22,8 +22,13 @@ function getUserData (name) {
     })
 }
 
+function getRelationships() {
+  return db('relationships').select()
+}
+
 module.exports = {
   getUsers,
   getUser,
+  getRelationships,
   getUserData
 }
