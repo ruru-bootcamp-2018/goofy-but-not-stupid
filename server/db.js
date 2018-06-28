@@ -1,8 +1,17 @@
-module.exports = {
-  getFruits
+const knex = require('knex')
+const config = require('../knexfile').development
+
+const db = knex(config)
+
+function getUsers () {
+  return db('users').select()
 }
 
-function getFruits () {
-  const fruits = ['banana', 'apple', 'feijoa']
-  return Promise.resolve(fruits)
+function getUser (name) {
+  return db('users').select().where({name})
+}
+
+module.exports = {
+  getUsers,
+  getUser
 }

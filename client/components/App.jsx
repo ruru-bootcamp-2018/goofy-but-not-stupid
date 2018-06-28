@@ -1,31 +1,43 @@
 import React from 'react'
 
-import {getFruits} from '../apiClient'
+import {getUsers} from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      fruits: []
+       users: []
     }
   }
 
   componentDidMount () {
-    getFruits()
-      .then(fruits => {
-        this.setState({fruits})
+    getUsers()
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          users: res.users
+        })
       })
   }
+
+  userClick (name) {
+    getPairings(name)
+      .then((pairings) => {
+        //something with the pairings
+      })
+  }
+
 
   render () {
     return (
       <div className='app'>
-        <h1>Fullstack Boilerplate</h1>
+        <h1>Don't H8 Gener8</h1>
         <ul>
-          {this.state.fruits.map(fruit => (
-            <li key={fruit}>{fruit}</li>
-          ))}
+          {this.state.users.map((user) => {
+            return <li>{user.name}</li>
+          })}
         </ul>
+        <button onClick={() => this.userClick('Dan')}>Test Dan</button>
       </div>
     )
   }
