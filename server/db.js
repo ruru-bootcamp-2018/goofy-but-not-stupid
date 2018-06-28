@@ -11,7 +11,13 @@ function getUser (name) {
   return db('users').select().where({name})
 }
 
+function getRelationships() {
+  return db('relationships').select()
+}
+
 module.exports = {
   getUsers,
-  getUser
+  getUser,
+  getRelationships
+
 }
