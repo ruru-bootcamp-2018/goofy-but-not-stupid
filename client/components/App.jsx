@@ -1,12 +1,13 @@
 import React from 'react'
 
-import {getUsers} from '../apiClient'
+import {getUsers, getUserData} from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-       users: []
+       users: [],
+       activeUser: {}
     }
   }
 
@@ -21,8 +22,9 @@ class App extends React.Component {
   }
 
   userClick (name) {
-    getPairings(name)
-      .then((pairings) => {
+    console.log(`clicked ${name}`)
+    getUserData(name)
+      .then((data) => {
         //something with the pairings
       })
   }
@@ -34,13 +36,14 @@ class App extends React.Component {
         <h1>Don't H8 Gener8</h1>
         <ul>
           {this.state.users.map((user) => {
-            return <li>{user.name}</li>
+            return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
           })}
         </ul>
-        <button onClick={() => this.userClick('Dan')}>Test Dan</button>
       </div>
     )
   }
 }
+
+// component to render all a users relevant data after click
 
 export default App
