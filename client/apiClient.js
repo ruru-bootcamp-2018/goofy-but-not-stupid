@@ -3,10 +3,10 @@ import request from 'superagent'
 const rootUrl = '/api/v1/'
 
 export function getUsers () {
-  return request.get(rootUrl)
+  return request.get(`${rootUrl}users`)
     .then(res => {
       console.log(res)
-      return res
+      return res.body
     })
 }
 
