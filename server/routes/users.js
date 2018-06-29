@@ -23,9 +23,8 @@ const router = express.Router()
 // }
 
 router.get('/team', (req, res) => {
-  teams.processRelationships(4)
+  teams.processRelationships(3)
   .then(team => {
-    console.log(team)
     res.json(team)
   })
 })

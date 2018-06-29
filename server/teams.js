@@ -1,9 +1,7 @@
 const db = require('./db')
 
-processRelationships(3)
-
 function processRelationships(teamSize) {
-  db.getRelationships().then(relationships => {
+ return db.getRelationships().then(relationships => {
     const lowestCount = relationships.reduce((acc, x) => {
       if (x.count < acc) acc = x.count
       return acc
@@ -20,7 +18,7 @@ function processRelationships(teamSize) {
     orderedArray = orderedArray.concat.apply([], orderedArray)
     const teams = makeTeams(teamSize)
 
-    populateTeams(orderedArray, teams)
+    return populateTeams(orderedArray, teams)
   })
 }
 
@@ -53,11 +51,11 @@ let count = 0
     }, [])
     finalArray.push(reduced)
 }
-let extraPeep = finalArray[0].pop()
-finalArray[2].push(extraPeep)
-finalArray[1].push(15)
+  let extraPeep = finalArray[0].pop()
+  finalArray[2].push(extraPeep)
+  finalArray[1].push(15)
 
-return finalArray
+  return finalArray
 }
 
 
