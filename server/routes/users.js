@@ -22,6 +22,14 @@ const router = express.Router()
 //   15: 'Cliff'
 // }
 
+router.get('/team', (req, res) => {
+  teams.processRelationships(4)
+  .then(team => {
+    console.log(team)
+    res.json(team)
+  })
+})
+
 router.get('/', (req, res) => {
   db.getUsers()
     .then(users => {
@@ -39,11 +47,6 @@ router.get('/:name', (req, res) => {
     })
 })
 
-router.get('/team', (req, res) => {
-  teams.processRelationships(4)
-  .then(team => {
-    res.json(team)
-  })
-})
+
 
 module.exports = router
