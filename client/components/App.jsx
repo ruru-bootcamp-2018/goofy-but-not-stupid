@@ -1,6 +1,7 @@
 import React from 'react'
 import {getUsers, getUserData, getTeams, getRandomName} from '../apiClient'
 import User from './User'
+import Teams from './Teams'
 
 
 class App extends React.Component {
@@ -66,8 +67,18 @@ class App extends React.Component {
     getTeams()
       .then((newTeams) => {
         console.log(newTeams)
+        let namedTeams = newTeams.map((team) => {
+          return team.map((id) => {
+            let targetPerson = this.state.users.find((person) => {
+              return (person.id == id)
+            })
+            return targetPerson.name
+          })
+        })
+        console.log(namedTeams)
+
         this.setState({
-          teams: newTeams
+          teams: namedTeams
         })
       })
     // call client api
@@ -98,7 +109,7 @@ class App extends React.Component {
         </div>
         <button class="button is-danger is-large" onClick={this.generateTeam}>Gimme A Team!</button>
         {this.state.activeUser && <User user={this.state.activeUser}/>}
-        {this.state.teams && <Teams />}
+        {this.state.teams && <Teams teams={this.state.teams}/>}
       </div>
     )
   }

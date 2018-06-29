@@ -12,7 +12,8 @@ class User extends React.Component {
     return (
         <React.Fragment>
             <h2>{this.props.user.name}</h2>
-            <p>All the other junk</p>
+            <img src={this.props.user.profile_pic} />
+            <p>Key Phrase: {this.props.user.phrases}</p>
         </React.Fragment>  
     )
   }
