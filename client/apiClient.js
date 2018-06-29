@@ -18,3 +18,11 @@ export function getUserData (name) {
       return res.body
     })
 }
+
+export function getTeams () {
+  return request.get(rootUrl+'teams')
+    .then(res => {
+      // console.log(res)
+      return res.body
+    })
+}
