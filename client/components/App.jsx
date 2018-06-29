@@ -7,11 +7,11 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [],
-      activeUser: {}
+      users: []
     }
 
     this.userClick = this.userClick.bind(this);
+    this.generateTeam = this.generateTeam.bind(this);
   }
 
   componentDidMount() {
@@ -38,21 +38,26 @@ class App extends React.Component {
 
   generateTeam() {
     getTeams()
-      .then((teams) => {
-        console.log(teams)
+      .then((newTeams) => {
+        console.log(newTeams)
+        this.setState({
+          teams: newTeams
+        })
       })
     // call client api
   }
 
 
-  render() {
+  render()  {
     return (
       <div className='app'>
         <section class="hero is-danger has-text-centered">
           <div class="hero-body">
             <div class="container">
+
               <h1 class="title">DON'T H8, GENER8!</h1>
               <h2 class="subtitle">goofyButNotStupid</h2>
+
             </div>
           </div>
         </section>
@@ -67,7 +72,8 @@ class App extends React.Component {
           </ul>
         </div>
         <button onClick={this.generateTeam}>Bing Bang booP gimme a team</button>
-        {this.state.activeUser.name && <User user={this.state.activeUser}/>}
+        {this.state.activeUser && <User user={this.state.activeUser}/>}
+        {this.state.teams && <Teams />}
       </div>
     )
   }
