@@ -4,17 +4,17 @@ import User from './User'
 
 
 class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-       users: [],
-       activeUser: {}
+      users: [],
+      activeUser: {}
     }
 
     this.userClick = this.userClick.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     getUsers()
       .then((res) => {
         // console.log(res)
@@ -24,7 +24,7 @@ class App extends React.Component {
       })
   }
 
-  userClick (name) {
+  userClick(name) {
     console.log(`clicked ${name}`)
     // console.log(this.state.users)
     getUserData(name)
@@ -33,7 +33,6 @@ class App extends React.Component {
           activeUser: finalData
         })
         // console.log({finalData})
-        //something with the pairings
       })
   }
 
@@ -46,18 +45,30 @@ class App extends React.Component {
   }
 
 
-  render () {
+  render() {
     return (
       <div className='app'>
-        <h1>Don't H8 Gener8</h1>
-        <ul>
-          {this.state.users.map((user) => {
-            return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
-          })}
-        </ul>
+        <section class="hero is-medium is-danger has-text-centered">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                DON'T H8, GENER8!
+      </h1>
+              <h2 class="subtitle">
+                goofyButNotStupid
+      </h2>
+            </div>
+          </div>
+        </section>
 
+        <div class='list'>
+          <ul>
+            {this.state.users.map((user) => {
+              return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
+            })}
+          </ul>
+        </div>
         <button onClick={this.generateTeam}>Bing Bang booP gimme a team</button>
-
         {this.state.activeUser.name && <User user={this.state.activeUser}/>}
       </div>
     )
