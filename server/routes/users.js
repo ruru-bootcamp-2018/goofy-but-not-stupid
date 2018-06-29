@@ -35,8 +35,6 @@ router.get('/:name', (req, res) => {
   let name = req.params.name
   db.getUserData(name)
     .then(userData => {
-
-      // this below never arrives!!!!!
       res.json(userData)
     })
 })

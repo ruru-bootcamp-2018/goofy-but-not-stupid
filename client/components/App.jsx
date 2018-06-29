@@ -1,6 +1,7 @@
 import React from 'react'
+import {getUsers, getUserData, getTeams} from '../apiClient'
+import User from './User'
 
-import {getUsers, getUserData} from '../apiClient'
 
 class App extends React.Component {
   constructor (props) {
@@ -9,6 +10,8 @@ class App extends React.Component {
        users: [],
        activeUser: {}
     }
+
+    this.userClick = this.userClick.bind(this);
   }
 
   componentDidMount () {
@@ -23,11 +26,23 @@ class App extends React.Component {
 
   userClick (name) {
     console.log(`clicked ${name}`)
+    // console.log(this.state.users)
     getUserData(name)
       .then((finalData) => {
-        console.log({finalData})
+        this.setState({
+          activeUser: finalData
+        })
+        // console.log({finalData})
         //something with the pairings
       })
+  }
+
+  generateTeam() {
+    getTeams()
+      .then((teams) => {
+        console.log(teams)
+      })
+    // call client api
   }
 
 
@@ -40,6 +55,10 @@ class App extends React.Component {
             return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
           })}
         </ul>
+
+        <button onClick={this.generateTeam}>Bing Bang booP gimme a team</button>
+
+        {this.state.activeUser.name && <User user={this.state.activeUser}/>}
       </div>
     )
   }
