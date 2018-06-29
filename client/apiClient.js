@@ -22,7 +22,7 @@ export function getUserData (name) {
 }
 
 export function getTeams () {
-  return request.get(rootUrl+'teams')
+  return request.get(rootUrl+'team')
     .then(res => {
       // console.log(res)
       return res.body

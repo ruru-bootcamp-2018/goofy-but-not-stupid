@@ -11,7 +11,7 @@ class Teams extends React.Component {
   render () {
     return (
         <React.Fragment>
-
+          <p>team shit</p>
         </React.Fragment>  
     )
   }
