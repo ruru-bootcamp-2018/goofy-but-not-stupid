@@ -17,8 +17,12 @@ function getUserData (name) {
     .then((userInfo) => {
       userData = userInfo
       console.log(userData)
-      // next step do db call to relationships table to get relevant stuff
-      // then return completed userData object
+      return getUserRelationships(userData.id)
+        .then((relationships) => {
+          console.log({relationships})
+          userData.relationships = relationships
+          return userData;
+        })
     })
 }
 
@@ -26,9 +30,16 @@ function getRelationships() {
   return db('relationships').select()
 }
 
+function getUserRelationships(id) {
+  return db('relationships')
+    .where('id_one', id)
+    .orWhere('id_two', id)
+}
+
 module.exports = {
   getUsers,
   getUser,
   getRelationships,
+  getUserRelationships,
   getUserData
 }

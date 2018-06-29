@@ -14,7 +14,7 @@ class App extends React.Component {
   componentDidMount () {
     getUsers()
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.setState({
           users: res.users
         })
@@ -24,7 +24,8 @@ class App extends React.Component {
   userClick (name) {
     console.log(`clicked ${name}`)
     getUserData(name)
-      .then((data) => {
+      .then((finalData) => {
+        console.log({finalData})
         //something with the pairings
       })
   }
