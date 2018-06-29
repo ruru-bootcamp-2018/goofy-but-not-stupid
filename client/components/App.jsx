@@ -51,7 +51,7 @@ class App extends React.Component {
   render()  {
     return (
       <div className='app'>
-        <section class="hero is-danger has-text-centered">
+        <section class="hero is-danger is-medium has-text-centered">
           <div class="hero-body">
             <div class="container">
 
@@ -71,7 +71,7 @@ class App extends React.Component {
             })}
           </ul>
         </div>
-        <button onClick={this.generateTeam}>Bing Bang booP gimme a team</button>
+        <button class="button is-danger is-large" onClick={this.generateTeam}>Gimme A Team!</button>
         {this.state.activeUser && <User user={this.state.activeUser}/>}
         {this.state.teams && <Teams />}
       </div>
