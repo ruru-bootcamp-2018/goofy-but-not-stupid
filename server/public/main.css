@@ -1,4 +1,9 @@
 .list {
-    padding: 20px;
+    padding-left: 20px;
     font-size: 20px;
+}
+
+.cohort {
+    padding: 10px;
+    font-size: 40px;
 }
