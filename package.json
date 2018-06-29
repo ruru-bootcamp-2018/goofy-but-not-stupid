@@ -7,7 +7,8 @@
     "dev": "nodemon server & yarn build --watch",
     "build": "webpack --config client/webpack.config.js",
     "test": "jest",
-    "start": "node server"
+    "start": "node server",
+    "postinstall": "webpack"
   },
   "babel": {
     "presets": [
