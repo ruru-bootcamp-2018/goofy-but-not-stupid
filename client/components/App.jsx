@@ -1,6 +1,7 @@
 import React from 'react'
 import {getUsers, getUserData, getTeams} from '../apiClient'
 import User from './User'
+import Teams from './Teams'
 
 
 class App extends React.Component {
@@ -40,8 +41,18 @@ class App extends React.Component {
     getTeams()
       .then((newTeams) => {
         console.log(newTeams)
+        let namedTeams = newTeams.map((team) => {
+          return team.map((id) => {
+            let targetPerson = this.state.users.find((person) => {
+              return (person.id == id)
+            })
+            return targetPerson.name
+          })
+        })
+        console.log(namedTeams)
+
         this.setState({
-          teams: newTeams
+          teams: namedTeams
         })
       })
     // call client api
@@ -51,20 +62,20 @@ class App extends React.Component {
   render()  {
     return (
       <div className='app'>
-        <section class="hero is-medium is-danger has-text-centered">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
+        <section className="hero is-medium is-danger has-text-centered">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
                 DON'T H8, GENER8!
               </h1>
-              <h2 class="subtitle">
+              <h2 className="subtitle">
                 goofyButNotStupid
               </h2>
             </div>
           </div>
         </section>
 
-        <div class='list'>
+        <div className='list'>
           <ul>
             {this.state.users.map((user) => {
               return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
@@ -73,7 +84,7 @@ class App extends React.Component {
         </div>
         <button onClick={this.generateTeam}>Bing Bang booP gimme a team</button>
         {this.state.activeUser && <User user={this.state.activeUser}/>}
-        {this.state.teams && <Teams />}
+        {this.state.teams && <Teams teams={this.state.teams}/>}
       </div>
     )
   }

@@ -11,7 +11,19 @@ class Teams extends React.Component {
   render () {
     return (
         <React.Fragment>
-          <p>team shit</p>
+          {this.props.teams.map((team) => {
+            return (
+              <React.Fragment>
+                <br />
+                  <ul>
+                    {team.map((person) => {
+                      return <li>{person}</li>
+                    })}
+                  </ul>
+                <br />
+              </ React.Fragment>
+            )
+          })}
         </React.Fragment>  
     )
   }
