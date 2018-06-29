@@ -11,7 +11,8 @@ class App extends React.Component {
       activeUser: {},
       nameOne: '',
       nameTwo: '',
-      nameThree: ''
+      nameThree: '',
+      users: []
     }
 
     this.userClick = this.userClick.bind(this);
@@ -86,7 +87,8 @@ class App extends React.Component {
             </div>
           </div>
         </section>
-        <div>{this.state.nameOne},{this.state.nameTwo},{this.state.nameThree}</div>
+        <div class="cohort">Cohort</div>
+        <div class='teams'>{this.state.nameOne},{this.state.nameTwo},{this.state.nameThree}</div>
         <div class='list'>
           <ul>
             {this.state.users.map((user) => {
