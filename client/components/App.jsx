@@ -1,5 +1,5 @@
 import React from 'react'
-import {getUsers, getUserData, getTeams} from '../apiClient'
+import {getUsers, getUserData, getTeams, getRandomName} from '../apiClient'
 import User from './User'
 
 
@@ -8,7 +8,10 @@ class App extends React.Component {
     super(props)
     this.state = {
       users: [],
-      activeUser: {}
+      activeUser: {},
+      nameOne: '',
+      nameTwo: '',
+      nameThree: ''
     }
 
     this.userClick = this.userClick.bind(this);
@@ -20,6 +23,27 @@ class App extends React.Component {
         // console.log(res)
         this.setState({
           users: res.users
+        })
+      })
+      getRandomName()
+      .then((res) => {
+            console.log(res.nickname);
+        this.setState({
+          nameOne: res.nickname
+        })
+      })
+      getRandomName()
+      .then((res) => {
+            console.log(res.nickname);
+        this.setState({
+          nameTwo: res.nickname
+        })
+      })
+      getRandomName()
+      .then((res) => {
+            console.log(res.nickname);
+        this.setState({
+          nameThree: res.nickname
         })
       })
   }
@@ -60,7 +84,7 @@ class App extends React.Component {
             </div>
           </div>
         </section>
-
+        <div>{this.state.nameOne},{this.state.nameTwo},{this.state.nameThree}</div>
         <div class='list'>
           <ul>
             {this.state.users.map((user) => {
