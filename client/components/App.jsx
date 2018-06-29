@@ -48,18 +48,16 @@ class App extends React.Component {
   render() {
     return (
       <div className='app'>
-        <section class="hero is-medium is-danger has-text-centered">
+        <section class="hero is-danger has-text-centered">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">
-                DON'T H8, GENER8!
-      </h1>
-              <h2 class="subtitle">
-                goofyButNotStupid
-      </h2>
+              <h1 class="title">DON'T H8, GENER8!</h1>
+              <h2 class="subtitle">goofyButNotStupid</h2>
             </div>
           </div>
         </section>
+
+        <div class='cohort'>Cohort</div>
 
         <div class='list'>
           <ul>
