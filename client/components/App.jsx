@@ -98,7 +98,6 @@ class App extends React.Component {
           </div>
         </section>
         <div className="cohort">Cohort</div>
-        <div className='teams'>{this.state.nameOne},{this.state.nameTwo},{this.state.nameThree}</div>
         <div className='list'>
           <ul>
             {this.state.users.map((user) => {
@@ -108,7 +107,7 @@ class App extends React.Component {
         </div>
         <button className="button is-danger is-large" onClick={this.generateTeam}>Gimme A Team!</button>
         {this.state.activeUser && <User user={this.state.activeUser}/>}
-        {this.state.teams && <Teams teams={this.state.teams}/>}
+        {this.state.teams && <Teams teams={this.state.teams} teamNameOne={this.state.nameOne} teamNameTwo={this.state.nameTwo} teamNameThree={this.state.nameThree} />}
       </div>
     )
   }
