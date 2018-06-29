@@ -7,15 +7,11 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-<<<<<<< HEAD
       users: [],
       activeUser: {},
       nameOne: '',
       nameTwo: '',
       nameThree: ''
-=======
-      users: []
->>>>>>> 8f875f99f45327877603f48d48f92ae202e4090c
     }
 
     this.userClick = this.userClick.bind(this);
