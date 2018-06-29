@@ -12,8 +12,7 @@ class App extends React.Component {
       activeUser: {},
       nameOne: '',
       nameTwo: '',
-      nameThree: '',
-      users: []
+      nameThree: ''
     }
 
     this.userClick = this.userClick.bind(this);
