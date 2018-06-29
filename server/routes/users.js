@@ -1,5 +1,7 @@
 const express = require('express')
 const db = require('../db')
+const teams = require('../teams')
+
 const router = express.Router()
 
 // const cohort = {
@@ -33,10 +35,15 @@ router.get('/:name', (req, res) => {
   let name = req.params.name
   db.getUserData(name)
     .then(userData => {
-
-      // this below never arrives!!!!!
       res.json(userData)
     })
+})
+
+router.get('/team', (req, res) => {
+  teams.processRelationships(4)
+  .then(team => {
+    res.json(team)
+  })
 })
 
 module.exports = router
