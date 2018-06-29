@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon server & yarn build --watch",
     "build": "webpack --config client/webpack.config.js",
-    "test": "jest"
+    "test": "jest",
+    "start": "node server",
+    "postinstall": "webpack --config client/webpack.config.js"
   },
   "babel": {
     "presets": [
@@ -22,8 +24,10 @@
   },
   "dependencies": {
     "express": "^4.16.3",
+    "heroku": "^7.5.4",
     "knex": "^0.14.6",
-    "sqlite3": "^4.0.1"
+    "sqlite3": "^4.0.1",
+    "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
