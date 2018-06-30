@@ -26,6 +26,7 @@ class App extends React.Component {
           users: res.users
         })
       })
+
       getRandomName()
       .then((res) => {
             console.log(res.nickname);
@@ -33,6 +34,7 @@ class App extends React.Component {
           nameOne: res.nickname
         })
       })
+
       getRandomName()
       .then((res) => {
             console.log(res.nickname);
@@ -40,6 +42,7 @@ class App extends React.Component {
           nameTwo: res.nickname
         })
       })
+
       getRandomName()
       .then((res) => {
             console.log(res.nickname);
@@ -87,12 +90,13 @@ class App extends React.Component {
   render()  {
     return (
       <div className='app'>
-        {!this.state.teams && 
-          <div className='row'>
-            <div className='twelve columns'>
-                <button className="btn btn--stripe btn--radius centered" onClick={this.generateTeam}><h1>DON'T H8, GENER8</h1></button>
+        {
+          !this.state.teams && 
+            <div className='row'>
+              <div className='twelve columns'>
+                  <button className="btn btn--stripe btn--radius centered" onClick={this.generateTeam}><h1>DON'T H8, GENER8</h1></button>
+              </div>
             </div>
-          </div>
         }
         <hr />
 
@@ -105,15 +109,19 @@ class App extends React.Component {
             </ul>
           </div>
 
-          <div className='nine columns'>
-            <img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
-          </div>
+            {
+              !this.state.activeUser &&
+                <div className='nine columns'>
+                  <img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
+                </div>
+            }
+            {
+              this.state.activeUser && 
+                <User user={this.state.activeUser}/>
+            }
+
         </div>
 
-        {this.state.activeUser && 
-          <React.Fragment>
-            <User user={this.state.activeUser}/>
-          </React.Fragment>}
         {this.state.teams && 
           <React.Fragment>
             <Teams teams={this.state.teams} teamNameOne={this.state.nameOne} teamNameTwo={this.state.nameTwo} teamNameThree={this.state.nameThree} />

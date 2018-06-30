@@ -114,6 +114,12 @@ hr {
     width: 100%;
 }
 
+.user-img {
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
 li {
     margin-bottom: 5px;
 }
@@ -121,4 +127,12 @@ li {
 .btn {
     width: auto;
     height: auto;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+p {
+    margin-bottom: 10px;
 }

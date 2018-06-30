@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../db')
 const teams = require('../teams')
+const api = require('../api')
 
 const router = express.Router()
 
@@ -34,6 +35,14 @@ router.get('/', (req, res) => {
     .then(users => {
       // console.log(users)
       res.json({users})
+    })
+})
+
+router.get('/poki', (req, res) => {
+  api.getPoki()
+    .then((poki) => {
+      // console.log(poki)
+      res.json(poki)
     })
 })
 

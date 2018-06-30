@@ -1,8 +1,7 @@
 import request from 'superagent'
-
 const rootUrl = '/api/v1/users/'
 
-console.log(getRandomName());
+
 
 export function getUsers () {
   return request.get(rootUrl)
@@ -35,4 +34,12 @@ export function getRandomName () {
   .then(res => {
     return res.body
   })
+}
+
+export function getPoki () {
+  // TODO convert to backend api func
+  return request.get(rootUrl+'poki')
+    .then(res => {      
+      return res.body
+    })
 }
