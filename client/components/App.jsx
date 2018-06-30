@@ -9,7 +9,6 @@ class App extends React.Component {
     super(props)
     this.state = {
       users: [],
-      activeUser: {},
       nameOne: '',
       nameTwo: '',
       nameThree: ''
@@ -84,30 +83,41 @@ class App extends React.Component {
   }
 
 
+
   render()  {
     return (
       <div className='app'>
-        <section className="hero is-danger is-medium has-text-centered">
-          <div className="hero-body">
-            <div className="container">
-
-              <h1 className="title">DON'T H8, GENER8!</h1>
-              <h2 className="subtitle">goofyButNotStupid</h2>
-
+        {!this.state.teams && 
+          <div className='row'>
+            <div className='twelve columns'>
+                <button className="btn btn--stripe btn--radius centered" onClick={this.generateTeam}><h1>DON'T H8, GENER8</h1></button>
             </div>
           </div>
-        </section>
-        <div className="cohort">Cohort</div>
-        <div className='list'>
-          <ul>
-            {this.state.users.map((user) => {
-              return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
-            })}
-          </ul>
+        }
+        <hr />
+
+        <div className='row'>
+          <div className='three columns'>
+            <ul>
+              {this.state.users.map((user) => {
+                return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
+              })}
+            </ul>
+          </div>
+
+          <div className='nine columns'>
+            <img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
+          </div>
         </div>
-        <button className="button is-danger is-large" onClick={this.generateTeam}>Gimme A Team!</button>
-        {this.state.activeUser && <User user={this.state.activeUser}/>}
-        {this.state.teams && <Teams teams={this.state.teams} teamNameOne={this.state.nameOne} teamNameTwo={this.state.nameTwo} teamNameThree={this.state.nameThree} />}
+
+        {this.state.activeUser && 
+          <React.Fragment>
+            <User user={this.state.activeUser}/>
+          </React.Fragment>}
+        {this.state.teams && 
+          <React.Fragment>
+            <Teams teams={this.state.teams} teamNameOne={this.state.nameOne} teamNameTwo={this.state.nameTwo} teamNameThree={this.state.nameThree} />
+          </React.Fragment>}
       </div>
     )
   }
