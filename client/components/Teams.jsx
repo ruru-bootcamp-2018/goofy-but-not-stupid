@@ -14,13 +14,13 @@ class Teams extends React.Component {
     })
   }
 
-
+  // up to here - need this comp to call it's own teamnames with getTeamNames, then each team to print in a four col div
   render () {
     return (
         <React.Fragment>
           {this.state.teamNames && this.props.teams.map((team, i) => {
             return (
-              <React.Fragment>
+              <div className="four columns">
                 <br />
                 <h1>Team name: <strong>{this.state.teamNames[i]}</strong></h1>
                 <br />
@@ -30,7 +30,7 @@ class Teams extends React.Component {
                     })}
                   </ul>
                 <br />
-              </ React.Fragment>
+              </div>
             )
           })}
         </React.Fragment>  
