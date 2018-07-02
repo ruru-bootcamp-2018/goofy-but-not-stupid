@@ -40,7 +40,7 @@ class Home extends React.Component {
     render () {
         return (
             <React.Fragment>
-                <div className='row'>
+                <div className='row first'>
                     <div className='twelve columns'>
                         <Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1>DON'T H8, GENER8</h1></button></Link>
                     </div>

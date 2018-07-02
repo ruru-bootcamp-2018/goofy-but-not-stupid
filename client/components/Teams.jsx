@@ -1,4 +1,5 @@
 import React from 'react'
+import {getRandomName} from '../apiClient'
 
 class Teams extends React.Component {
   constructor (props) {
@@ -9,9 +10,37 @@ class Teams extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({
-      teamNames: [this.props.teamNameOne, this.props.teamNameTwo, this.props.teamNameThree]
-    })
+    getRandomName()
+      .then((res) => {
+        console.log(res.nickname);
+        let newTeamNames = this.state.teamNames
+        newTeamNames.push(res.nickname)
+        this.setState({
+          teamNames: newTeamNames
+        })
+      })
+      .then(() => {
+        getRandomName()
+          .then((res) => {
+            console.log(res.nickname);
+            let newTeamNames = this.state.teamNames
+            newTeamNames.push(res.nickname)
+            this.setState({
+              teamNames: newTeamNames
+            })
+          })
+      })
+      .then(() => {
+        getRandomName()
+          .then((res) => {
+            console.log(res.nickname);
+            let newTeamNames = this.state.teamNames
+            newTeamNames.push(res.nickname)
+            this.setState({
+              teamNames: newTeamNames
+            })
+          })
+      })
   }
 
   // up to here - need this comp to call it's own teamnames with getTeamNames, then each team to print in a four col div
@@ -22,7 +51,7 @@ class Teams extends React.Component {
             return (
               <div className="four columns">
                 <br />
-                <h1>Team name: <strong>{this.state.teamNames[i]}</strong></h1>
+                <h1><strong>{this.state.teamNames[i]}</strong></h1>
                 <br />
                   <ul>
                     {team.map((person) => {

@@ -8,10 +8,20 @@ class User extends React.Component {
     }
   }
 
+  componentDidMount() {
+    getPoki()
+      .then((poki) => {
+        // console.log('back to user comp: ',poki)
+        this.setState({
+          poki: poki
+        })
+      })
+  }
+
   componentDidUpdate() {
     getPoki()
       .then((poki) => {
-        console.log('back to user comp: ',poki)
+        // console.log('back to user comp: ',poki)
         this.setState({
           poki: poki
         })
@@ -29,15 +39,15 @@ class User extends React.Component {
           <div className="three columns user">
 
             <h5>{this.props.user.name}</h5>
-            <p className="caps item"><b>Ability: </b>
+
+            <p className="item"><b>Agility:  </b>
+              {this.props.user.agility}
+            </p>
+            <p className="caps item"><b>Special abilities: </b>
               {
                 this.state.poki && 
                   this.state.poki.fullInfo.abilities[0].ability.name
               }
-            </p>
-
-            <p className="item"><b>Agility:  </b>
-              {this.props.user.agility}
             </p>
               
             <p className="item"><b>Key Phrase: </b>{this.props.user.phrases}</p>

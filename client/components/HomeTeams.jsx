@@ -40,37 +40,13 @@ class HomeTeams extends React.Component {
                 console.log(this.state)
                 })
         })
-
-    getRandomName()
-        .then((res) => {
-              console.log(res.nickname);
-          this.setState({
-            nameOne: res.nickname
-          })
-        })
-  
-    getRandomName()
-        .then((res) => {
-              console.log(res.nickname);
-          this.setState({
-            nameTwo: res.nickname
-          })
-        })
-  
-    getRandomName()
-        .then((res) => {
-              console.log(res.nickname);
-          this.setState({
-            nameThree: res.nickname
-          })
-        })
   }
 
 
   render () {
     return (
         <React.Fragment>
-            <div className='row'>
+            <div className='row first'>
                 <div className='twelve columns'>
                 <Link to='/'><button className="btn btn--stripe btn--radius centered"><h1>&larr;-------------</h1></button></Link>
                 </div>
