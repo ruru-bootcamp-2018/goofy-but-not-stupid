@@ -12,6 +12,7 @@ class App extends React.Component {
 
   }
 
+
   render()  {
     return (
       <Router>
@@ -19,7 +20,6 @@ class App extends React.Component {
 
         <Route exact path='/' component={Home} />
         <Route exact path='/teams' component={HomeTeams} />
-
         </div>
       </Router>
     )

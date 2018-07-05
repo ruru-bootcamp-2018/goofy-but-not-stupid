@@ -49,20 +49,20 @@ class Teams extends React.Component {
         <React.Fragment>
           {this.state.teamNames && this.props.teams.map((team, i) => {
             return (
-              <div className="four columns">
+              <div className="four columns" key={i}>
                 <br />
                 <h1><strong>{this.state.teamNames[i]}</strong></h1>
                 <br />
                   <ul>
                     {team.map((person) => {
-                      return <li>{person}</li>
+                      return <li key={person}>{person}</li>
                     })}
                   </ul>
                 <br />
               </div>
             )
           })}
-        </React.Fragment>  
+        </React.Fragment>
     )
   }
 }

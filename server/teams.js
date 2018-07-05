@@ -29,34 +29,23 @@ function makeTeams(teamSize) {
 }
 
 function populateTeams(orderedArray, teams) {
-  // get number of unique ids
+  // I would like to point out this optimises for pairings not yet had
+  // it does not address the cate-brad issue atm
   let uniqueIds = getUniqueIds(orderedArray)
   let maxSize = Math.ceil(uniqueIds.length / teams.length)
 
   orderedArray.forEach((pair) => {
-    // check if pair members present in each team
-    var pairIndexes = getIndexes(pair, teams);
-    // if neither is
+    let pairIndexes = getIndexes(pair, teams)
     if (pairIndexes[0] + pairIndexes[1] == -2){
-      // add both to next emptiest array
-      emptiestTeam = getEmptiest(teams)
-      teams[emptiestTeam].push(pair.id_one, pair.id_two)
-    // else if one is (but not both)
+      teams[getEmptiest(teams)].push(pair.id_one, pair.id_two)
     } else if (pairIndexes[0] == -1 || pairIndexes[1] == -1){
-      // if first not present, second = already sorted. else first is already sorted
       let sorted = pairIndexes[0] == -1 ? 1 : 0
-      let currentTeam = pairIndexes[sorted]
-      // if that team array is not full
-      if(teams[currentTeam].length < maxSize) {
-        // add other member to team
-        teams[currentTeam].push(sorted == 0 ? pair.id_two : pair.id_one)
-      } else {
-        // else add other member to next emptiest team array
-        teams[getEmptiest(teams)].push(sorted == 0 ? pair.id_two : pair.id_one)
-      }
+      let currentTeam = teams[pairIndexes[sorted]]
+      let nextTeam = (currentTeam.length < maxSize ? currentTeam : teams[getEmptiest(teams)])
+      nextTeam.push(sorted == 0 ? pair.id_two : pair.id_one)
     }
   })
-  return teams //finalArray
+  return teams
 }
 
 //im making this func assuming more than just your cohort will use this
