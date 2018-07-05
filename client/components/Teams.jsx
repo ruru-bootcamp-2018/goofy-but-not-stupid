@@ -12,7 +12,7 @@ class Teams extends React.Component {
   componentDidMount () {
     getRandomName()
       .then((res) => {
-        console.log(res.nickname);
+        // console.log(res.nickname);
         let newTeamNames = this.state.teamNames
         newTeamNames.push(res.nickname)
         this.setState({
@@ -22,7 +22,7 @@ class Teams extends React.Component {
       .then(() => {
         getRandomName()
           .then((res) => {
-            console.log(res.nickname);
+            // console.log(res.nickname);
             let newTeamNames = this.state.teamNames
             newTeamNames.push(res.nickname)
             this.setState({
@@ -33,7 +33,7 @@ class Teams extends React.Component {
       .then(() => {
         getRandomName()
           .then((res) => {
-            console.log(res.nickname);
+            // console.log(res.nickname);
             let newTeamNames = this.state.teamNames
             newTeamNames.push(res.nickname)
             this.setState({

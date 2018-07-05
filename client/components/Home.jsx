@@ -10,10 +10,10 @@ class Home extends React.Component {
         this.state = {
           users: [],
         }
-    
+
         this.userClick = this.userClick.bind(this);
     }
-    
+
     componentDidMount() {
         getUsers()
             .then((res) => {
@@ -21,7 +21,7 @@ class Home extends React.Component {
                 this.setState({
                     users: res.users
                 })
-            })      
+            })
     }
 
     userClick(name) {
@@ -52,7 +52,7 @@ class Home extends React.Component {
                     <div className='three columns'>
                         <ul>
                             {this.state.users.map((user) => {
-                                return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
+                                return <li key={user.id} onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
                             })}
                         </ul>
                     </div>
@@ -63,20 +63,16 @@ class Home extends React.Component {
                             <img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
                             </div>
                     }
-                    
+
                     {
-                        this.state.activeUser && 
+                        this.state.activeUser &&
                             <User user={this.state.activeUser}/>
                     }
                 </div>
-            </React.Fragment>  
+            </React.Fragment>
         )
     }
 }
 
 
 export default Home
-
-
-
-

@@ -15,7 +15,7 @@ class HomeTeams extends React.Component {
   componentDidMount() {
     getUsers()
         .then((res) => {
-            console.log('users: ',res.users)
+            // console.log('users: ',res.users)
             this.setState({
                 users: res.users
             })
@@ -37,7 +37,7 @@ class HomeTeams extends React.Component {
                 this.setState({
                     teams: namedTeams
                 })
-                console.log(this.state)
+                // console.log(this.state)
                 })
         })
   }
@@ -56,11 +56,11 @@ class HomeTeams extends React.Component {
 
             <div className='row'>
                 {
-                    this.state.teams && 
+                    this.state.teams &&
                         <Teams teams={this.state.teams} teamNameOne={this.state.nameOne} teamNameTwo={this.state.nameTwo} teamNameThree={this.state.nameThree} />
                 }
             </div>
-        </React.Fragment>  
+        </React.Fragment>
     )
   }
 }
