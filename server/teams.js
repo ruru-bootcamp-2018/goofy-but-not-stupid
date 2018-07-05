@@ -35,19 +35,19 @@ function populateTeams(orderedArray, teams) {
 
   orderedArray.forEach((pair) => {
     // check if pair members present in each team
-    let pairIndexes = [-1,-1]; // will become team index if present - but func not written yet
+    var pairIndexes = getIndexes(pair, teams);
     // if neither is
     if (pairIndexes[0] + pairIndexes[1] == -2){
       // add both to next emptiest array
       emptiestTeam = getEmptiest(teams)
       teams[emptiestTeam].push(pair.id_one, pair.id_two)
     // else if one is (but not both)
-  } else if (pairIndexes[0] = -1 || pairIndexes[1] == -1){
+    } else if (pairIndexes[0] == -1 || pairIndexes[1] == -1){
       // if first not present, second = already sorted. else first is already sorted
       let sorted = pairIndexes[0] == -1 ? 1 : 0
       let currentTeam = pairIndexes[sorted]
       // if that team array is not full
-      if(teams[currentTeam]!= maxSize) {
+      if(teams[currentTeam].length < maxSize) {
         // add other member to team
         teams[currentTeam].push(sorted == 0 ? pair.id_two : pair.id_one)
       } else {
@@ -56,7 +56,6 @@ function populateTeams(orderedArray, teams) {
       }
     }
   })
-  console.log(teams);
   return teams //finalArray
 }
 
@@ -66,6 +65,15 @@ function getUniqueIds(pairsArr) {
   pairsArr.forEach((pair) => {
     if(!arr.includes(pair.id_one)) arr.push(pair.id_one)
     if(!arr.includes(pair.id_two)) arr.push(pair.id_two)
+  })
+  return arr
+}
+
+function getIndexes(pair, teams) {
+  let arr = [-1, -1]
+  teams.forEach((team, i) => {
+    if(team.includes(pair.id_one)) arr[0] = i
+    if(team.includes(pair.id_two)) arr[1] = i
   })
   return arr
 }
