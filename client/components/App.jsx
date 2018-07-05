@@ -62,7 +62,6 @@ class App extends React.Component {
   generateTeam() {
     getTeams()
       .then((newTeams) => {
-        console.log(newTeams)
         let namedTeams = newTeams.map((team) => {
           return team.map((id) => {
             let targetPerson = this.state.users.find((person) => {
@@ -96,7 +95,7 @@ class App extends React.Component {
         <div className='list'>
           <ul>
             {this.state.users.map((user) => {
-              return <li onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
+              return <li key={user.id} onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
             })}
           </ul>
         </div>
