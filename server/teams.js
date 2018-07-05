@@ -29,19 +29,34 @@ function makeTeams(teamSize) {
 }
 
 function populateTeams(orderedArray, teams) {
+  // get number of unique ids
+  let uniqueIds = getUniqueIds(orderedArray)
   for (var i = 0; i < orderedArray.length; i++){
-    // check if pair members present
-    // if one is
+    // check if pair members present in each team
+    let currentTeams = [-1,-1]; // will become team index if present - but func not written yet
+    // if neither is
+    if (currentTeams[0] + currentTeams[1] == -2){
+      // add both to next emptiest array
+    // else if one is (but not both)
+    } else if (currentTeams[0] = -1 || currentTeams[1] == -1){
       // if that team array is not full
         // add other member to team
       // else add other member to next emptiest team array
-    // else if neither is
-      // add both to next emptiest array
+    }
   }
 
-  return finalArray
+  return teams //finalArray
 }
 
+//im making this func assuming more than just your cohort will use this
+function getUniqueIds(pairsArr) {
+  let arr = [];
+  pairsArr.forEach((pair) => {
+    if(!arr.includes(pair.id_one)) arr.push(pair.id_one)
+    if(!arr.includes(pair.id_two)) arr.push(pair.id_two)
+  })
+  return arr
+}
 
 module.exports = {
   processRelationships,

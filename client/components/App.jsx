@@ -29,21 +29,18 @@ class App extends React.Component {
       })
       getRandomName()
       .then((res) => {
-            console.log(res.nickname);
         this.setState({
           nameOne: res.nickname
         })
       })
       getRandomName()
       .then((res) => {
-            console.log(res.nickname);
         this.setState({
           nameTwo: res.nickname
         })
       })
       getRandomName()
       .then((res) => {
-            console.log(res.nickname);
         this.setState({
           nameThree: res.nickname
         })
