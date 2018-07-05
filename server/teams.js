@@ -29,10 +29,9 @@ function makeTeams(teamSize) {
 }
 
 function populateTeams(orderedArray, teams) {
-  // I would like to point out this optimises for pairings not yet had
-  // it does not address the cate-brad issue atm
   let uniqueIds = getUniqueIds(orderedArray)
   let maxSize = Math.ceil(uniqueIds.length / teams.length)
+  let noNoPairs = theyWhoMustNotBePaired(orderedArray)
 
   orderedArray.forEach((pair) => {
     let pairIndexes = getIndexes(pair, teams)
@@ -41,14 +40,26 @@ function populateTeams(orderedArray, teams) {
     } else if (pairIndexes[0] == -1 || pairIndexes[1] == -1){
       let sorted = pairIndexes[0] == -1 ? 1 : 0
       let currentTeam = teams[pairIndexes[sorted]]
-      let nextTeam = (currentTeam.length < maxSize ? currentTeam : teams[getEmptiest(teams)])
+      let badPair = neverPair(pair, currentTeam, noNoPairs)
+      let nextTeam = (currentTeam.length < maxSize && !badPair ? currentTeam : teams[getEmptiest(teams)])
       nextTeam.push(sorted == 0 ? pair.id_two : pair.id_one)
     }
   })
   return teams
 }
 
-//im making this func assuming more than just your cohort will use this
+function theyWhoMustNotBePaired(pairs) {
+  let maxCount = pairs[pairs.length - 1].count
+  return pairs.filter((pair) => pair.count == maxCount)
+}
+
+function neverPair(pair, team, noNoPairs){
+  let newPerson = team.includes(pair.id_one) ? pair.id_two : pair.id_one
+  return noNoPairs.find((badPair) => {
+    return (badPair.id_one == newPerson && team.includes(badPair.id_two)) || (badPair.id_two == newPerson && team.includes(badPair.id_one))
+  })
+}
+
 function getUniqueIds(pairsArr) {
   let arr = [];
   pairsArr.forEach((pair) => {
@@ -71,6 +82,7 @@ function getEmptiest(teams) {
   lengthsArr = teams.map((team) => team.length)
   return lengthsArr.indexOf(Math.min.apply(Math, lengthsArr))
 }
+
 
 module.exports = {
   processRelationships,
