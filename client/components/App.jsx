@@ -74,8 +74,6 @@ class App extends React.Component {
             return targetPerson.name
           })
         })
-        console.log(namedTeams)
-
         this.setState({
           teams: namedTeams
         })
