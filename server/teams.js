@@ -31,19 +31,25 @@ function makeTeams(teamSize) {
 function populateTeams(orderedArray, teams) {
   // get number of unique ids
   let uniqueIds = getUniqueIds(orderedArray)
-  for (var i = 0; i < orderedArray.length; i++){
+  console.log(getEmptiest([[1],[2,2]]))
+  console.log(getEmptiest([[1],[2,2],[]]))
+
+
+  orderedArray.forEach((pair) => {
     // check if pair members present in each team
     let currentTeams = [-1,-1]; // will become team index if present - but func not written yet
     // if neither is
     if (currentTeams[0] + currentTeams[1] == -2){
       // add both to next emptiest array
+      emptiestTeam = getEmptiest(teams)
+      teams[emptiestTeam].push(pair.id_one, pair.id_two)
     // else if one is (but not both)
     } else if (currentTeams[0] = -1 || currentTeams[1] == -1){
       // if that team array is not full
         // add other member to team
       // else add other member to next emptiest team array
     }
-  }
+  })
 
   return teams //finalArray
 }
@@ -56,6 +62,11 @@ function getUniqueIds(pairsArr) {
     if(!arr.includes(pair.id_two)) arr.push(pair.id_two)
   })
   return arr
+}
+
+function getEmptiest(teams) {
+  lengthsArr = teams.map((team) => team.length)
+  return lengthsArr.indexOf(Math.min.apply(Math, lengthsArr))
 }
 
 module.exports = {
