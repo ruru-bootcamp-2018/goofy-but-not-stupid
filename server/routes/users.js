@@ -1,39 +1,52 @@
 const express = require('express')
 const db = require('../db')
-const teams = require('../teams')
+const makeTeams = require('../teams')
 const api = require('../api')
+
+const tempTeamSelection = [
+  {
+    max: 5,
+    team: [],
+    full: false
+  },
+  {
+    max: 5,
+    team: [],
+    full: false
+  },
+  {
+    max: 5,
+    team: [],
+    full: false
+  }
+]
 
 const router = express.Router()
 
-// const cohort = {
-//   1: 'Dan',
-//   2: 'Rebecca D',
-//   3: 'Riki',
-//   4: 'Reuben',
-//   5: 'Brad',
-//   6: 'Cate',
-//   7: 'Tay',
-//   8: 'Rebecca L',
-//   9: 'Ross',
-//   10: 'Stan',
-//   11: 'Anton',
-//   12: 'Hayden',
-//   13: 'Kelly',
-//   14: 'Phoenix',
-//   15: 'Cliff'
-// }
-
 router.get('/team', (req, res) => {
-  teams.processRelationships(3)
-  .then(team => {
-    res.json(team)
-  })
+  let teams = [...tempTeamSelection] // will switch this route to post with the teamselection
+  db.getUsers()
+    .then(cohort => {
+      new Promise((resolve, reject) => {
+        makeTeams(cohort, teams, resolve)
+      })
+      .then(finalTeam => {
+        console.log(finalTeams)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  // teams.processRelationships(3)
+  // .then(team => {
+  //   res.json(team)
+  // })
 })
 
 router.get('/', (req, res) => {
   db.getUsers()
     .then(users => {
-      // console.log(users)
       res.json({users})
     })
 })
@@ -41,13 +54,11 @@ router.get('/', (req, res) => {
 router.get('/poki', (req, res) => {
   api.getPoki()
     .then((poki) => {
-      // console.log(poki)
       res.json(poki)
     })
 })
 
 router.get('/:name', (req, res) => {
-  console.log('made it to server side')
   let name = req.params.name
   db.getUserData(name)
     .then(userData => {
