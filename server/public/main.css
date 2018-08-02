@@ -1,22 +1,146 @@
-.list {
-    padding-left: 20px;
-    font-size: 20px;
-    margin-left: 40px;
 
+/* /////////////////////Cool buttons//////////////// */
+
+@-webkit-keyframes stripe-slide {
+    0% {
+      background-position: 0% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+   }
+   @keyframes stripe-slide {
+    0% {
+      background-position: 0% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+   }
+   
+   button {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: sans-serif;
+   }
+   
+   .btn {
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    line-height: normal;
+    cursor: pointer;
+    -moz-user-select: text;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 16px 36px 22px;
+    background-color: #fff;
+    color: #666;
+    border: 2px solid #666;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    transition: all .5s ease;
+   }
+   .btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+   }
+   .btn--stripe {
+    overflow: hidden;
+    position: relative;
+    width: 140px;
+   }
+   .btn--stripe:after {
+    content: '';
+    display: block;
+    height: 7px;
+    width: 100%;
+    background-image: repeating-linear-gradient(45deg, #666, #666 1px, transparent 2px, transparent 5px);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-top: 1px solid #666;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-size: 7px 7px;
+   }
+   .btn--stripe:hover {
+    background-color: #666;
+    color: #fff;
+    border-color: #000;
+   }
+   .btn--stripe:hover:after {
+    background-image: repeating-linear-gradient(45deg, #fff, #fff 1px, transparent 2px, transparent 5px);
+    border-top: 1px solid #000;
+    -webkit-animation: stripe-slide 12s infinite linear forwards;
+            animation: stripe-slide 12s infinite linear forwards;
+   }
+   .btn--large {
+    width: 50%;
+   }
+   .btn--radius {
+    border-radius: 36px;
+   }
+   
+
+   /* ///////////////////////////////////////// */
+
+   
+
+
+hr {
+    padding-top: 10px;
 }
 
-.cohort {
-    padding: 10px;
-    font-size: 40px;
-    margin-left: 25px;
+.text-centered {
+    text-align: center;
 }
 
-.button {
-    padding: 10px;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-bottom: 20px;
+.centered {
+    display: block;
+    margin: auto;
 }
-.teams {
-    
+
+.form-title {
+    margin-bottom: 10px;
+}
+
+.gif {
+    padding-top: 5px;
+    width: 100%;
+}
+
+.user-img {
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.btn {
+    width: auto;
+    height: auto;
+}
+
+.caps {
+    text-transform: capitalize;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.first {
+    margin-top: 40px;;
 }
