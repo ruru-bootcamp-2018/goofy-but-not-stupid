@@ -1,22 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getUsers, getTeams, getRandomName } from '../apiClient'
-import Teams from './Teams'
 
+import Teams from './Teams'
+import BackToHomeButton from './BackToHomeButton'
 
 class HomeTeams extends React.Component {
     constructor(props) {
         super(props)
+
+        this.handleTeamAmountChange = this.handleTeamAmountChange.bind(this)
+        this.handleTeamNumberChange = this.handleTeamNumberChange.bind(this)
+        this.setTeams = this.setTeams.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+
         this.state = {
             users: [],
             submitted: false,
             teamAmount: 3,
             preprocessedTeams: []
-
         }
-
-        this.handleTeamAmountChange = this.handleTeamAmountChange.bind(this)
-        this.handleTeamNumberChange = this.handleTeamNumberChange.bind(this)
     }
 
     componentDidMount() {
@@ -26,59 +29,73 @@ class HomeTeams extends React.Component {
                     users: res.users
                 })
             }) // cut here - below happens on form submit
-        // .then(() => {
-        //     getTeams()
-        //         .then((newTeams) => {
-        //             let namedTeams = newTeams.map((team) => {
-        //                 return team.team.map((person) => {
-        //                     return person.name
-        //                 })
-        //             })
-        //             this.setState({
-        //                 teams: namedTeams,
-        //                 teamNumber: namedTeams.length
-        //             })
-        //         })
-        // })
+            .then(() => {
+                this.setTeams()
+                //     getTeams()
+                //         .then((newTeams) => {
+                //             let namedTeams = newTeams.map((team) => {
+                //                 return team.team.map((person) => {
+                //                     return person.name
+                //                 })
+                //             })
+                //             this.setState({
+                //                 teams: namedTeams,
+                //                 teamNumber: namedTeams.length
+                //             })
+                //         })
+            })
     }
 
-    handleSubmit(e) {
-        e.preventDefault()
-    }
-
+    
     handleTeamAmountChange(e) {
         e.preventDefault()
-        this.setState({ [e.target.name]: Number(e.target.value) }, setTeams())
-
-        const setTeams = () => {
-            let rounding = this.state.users.length % this.state.teamAmount
-            
-            let arr = []
-            for (let i = 0; i < this.state.teamAmount; i++) {
-                let max = Math.floor(this.state.users.length/this.state.teamAmount)
-                if (rounding > 0) {
-                    max++
-                    rounding--
-                }
-                arr.push({
-                    max
-                })
+        let key = e.target.name
+        let newTeamAmountForStringPurposes = e.target.value
+        let newTeamAmountForRoundingPurposes = Number(e.target.value)
+        this.setTeams(newTeamAmountForRoundingPurposes)
+        this.setState({ [key]: newTeamAmountForStringPurposes })
+    }
+    
+    setTeams(newTeamAmount) {
+        let teamAmount = newTeamAmount || this.state.teamAmount
+        let rounding = this.state.users.length % teamAmount
+        // console.log(this.state.teamAmount, rounding)
+        let arr = []
+        for (let i = 0; i < teamAmount; i++) {
+            let max = Math.floor(this.state.users.length / teamAmount)
+            if (rounding > 0) {
+                max++
+                rounding--
             }
-            this.setState({
-                preprocessedTeams: arr
+            arr.push({
+                max
             })
         }
+        this.setState({
+            preprocessedTeams: arr
+        })
     }
-
+    
     handleTeamNumberChange(e) {
-        let newTeams = preprocessedTeams.map(i => Object.assign({}, i))
+        let newTeams = this.state.preprocessedTeams.map(i => Object.assign({}, i))
         newTeams[e.target.name].max = e.target.value
         this.setState({
             preprocessedTeams: newTeams
         })
-        // untested to here
     }
-
+    
+    handleSubmit(e) {
+        e.preventDefault()
+        this.state.preprocessedTeams.forEach(i => i.max = Number(i.max))
+        let totalMaxes = this.state.preprocessedTeams.reduce((acc, i) => acc + i.max, 0)
+        if (totalMaxes != this.state.users.length) {
+            alert(`Nope! Current total amount of people in teams is ${totalMaxes}. Please make this add up to the total amount of people in the cohort, ${this.state.users.length}.`)
+            return
+        } else {
+            console.log('making teams!')
+        }
+        
+    }
 
 
 
@@ -87,20 +104,24 @@ class HomeTeams extends React.Component {
         if (!this.state.submitted) {
             return (
                 <React.Fragment>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>How many teams?
-                            <input type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
+                    <BackToHomeButton />
+                    <form onSubmit={this.handleSubmit} className='text-centered'>
+
+                        <label><h5 className='form-title'>How many teams?</h5><br />
+                            <input required type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
                         </label>
-                        <p>Plz make team amounts add up to the total cohort number </p>
+                        <br/>
+                        <h5>How many people in each team?</h5>
 
                         {this.state.preprocessedTeams.map((team, i) => {
-                            return <div>
-                                <label>How many people in team {i+1}?
+                            return <div key={`input${i + 1}`}>
+                                <label>Team {i + 1}<br />
                                     <input type="number" name={i} onChange={this.handleTeamNumberChange}
                                         value={this.state.preprocessedTeams[i].max} />
                                 </label>
                             </div>
                         })}
+                        <input type="submit" className='button-primary' value='GENERATE TEAMS'/>
                     </form>
                 </React.Fragment>
             )
@@ -108,14 +129,7 @@ class HomeTeams extends React.Component {
 
         else return (
             <React.Fragment>
-                <div className='row first'>
-                    <div className='twelve columns'>
-                        <Link to='/'><button className="btn btn--stripe btn--radius centered"><h1>&larr;-------------</h1></button></Link>
-                    </div>
-                </div>
-
-                <hr />
-
+                <BackToHomeButton />
                 <div className='row'>
                     {
                         this.state.teams &&

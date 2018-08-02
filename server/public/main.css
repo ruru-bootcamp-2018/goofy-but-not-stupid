@@ -109,6 +109,10 @@ hr {
     margin: auto;
 }
 
+.form-title {
+    margin-bottom: 10px;
+}
+
 .gif {
     padding-top: 5px;
     width: 100%;

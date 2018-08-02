@@ -43,7 +43,7 @@ class User extends React.Component {
 
         <div className="three columns user">
 
-          <h5>{this.props.user.name}</h5>
+          <h1>{this.props.user.name}</h1>
 
           <p className="item"><b>Agility:  </b>
             {this.props.user.agility}
