@@ -16,10 +16,8 @@ function getUserData (name) {
   return getUser(name)
     .then((userInfo) => {
       userData = userInfo
-      console.log(userData)
       return getUserRelationships(userData.id)
         .then((relationships) => {
-          console.log({relationships})
           userData.relationships = relationships
           return userData;
         })

@@ -13,7 +13,6 @@ export function getUsers () {
 export function getUserData (name) {
   return request.get(rootUrl+name)
     .then(res => {
-      // console.log(res.body) // should be userData obj
       return res.body
     })
 }
@@ -21,8 +20,7 @@ export function getUserData (name) {
 export function getTeams () {
   return request.get(rootUrl+'team')
     .then(res => {
-      // console.log(res)
-      return res.body
+      return res.body.newTeams
     })
 }
 

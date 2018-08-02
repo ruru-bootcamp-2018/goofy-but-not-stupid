@@ -6,18 +6,15 @@ const api = require('../api')
 const tempTeamSelection = [
   {
     max: 5,
-    team: [],
-    full: false
+    team: []
   },
   {
     max: 5,
-    team: [],
-    full: false
+    team: []
   },
   {
     max: 5,
-    team: [],
-    full: false
+    team: []
   }
 ]
 
@@ -27,12 +24,11 @@ router.get('/team', (req, res) => {
   let teams = [...tempTeamSelection] // will switch this route to post with the teamselection
   db.getUsers()
     .then(cohort => {
-      new Promise((resolve, reject) => {
-        makeTeams(cohort, teams, resolve)
-      })
-      .then(finalTeam => {
-        console.log(finalTeams)
-      })
+      return makeTeams(cohort, teams)
+        .then(finalTeams => {
+          console.log(finalTeams)
+          res.json(finalTeams)
+        })
     })
     .catch(err => {
       console.log(err)
