@@ -5,7 +5,6 @@ const rootUrl = '/api/v1/users/'
 export function getUsers () {
   return request.get(rootUrl)
     .then(res => {
-      // console.log(res)
       return res.body
     })
 }
@@ -17,8 +16,11 @@ export function getUserData (name) {
     })
 }
 
-export function getTeams () {
-  return request.get(rootUrl+'team')
+export function getTeams (rawTeams) {
+  return request
+    .post(rootUrl+'team')
+    .send({rawTeams})
+    .set('Accept', 'application/json')
     .then(res => {
       return res.body.newTeams
     })

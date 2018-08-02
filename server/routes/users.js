@@ -3,41 +3,20 @@ const db = require('../db')
 const makeTeams = require('../teams')
 const api = require('../api')
 
-const tempTeamSelection = [
-  {
-    max: 5,
-    team: []
-  },
-  {
-    max: 5,
-    team: []
-  },
-  {
-    max: 5,
-    team: []
-  }
-]
-
 const router = express.Router()
 
-router.get('/team', (req, res) => {
-  let teams = [...tempTeamSelection] // will switch this route to post with the teamselection
+router.post('/team', (req, res) => {
+  let teams = req.body.rawTeams
   db.getUsers()
     .then(cohort => {
       return makeTeams(cohort, teams)
         .then(finalTeams => {
-          console.log(finalTeams)
           res.json(finalTeams)
         })
     })
     .catch(err => {
       console.log(err)
     })
-
-  // teams.processRelationships(3)
-  // .then(team => {
-  //   res.json(team)
-  // })
 })
 
 router.get('/', (req, res) => {
