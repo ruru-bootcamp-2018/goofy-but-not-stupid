@@ -36,9 +36,12 @@ function checkPairingCounts (teams) {
   db.getRelationships()
     .then((relationships) => {
       teams.forEach((team) => {
-        team.team.forEach(member => {
-          // hmmmm
-        })
+        // start paringCount at 0
+        // for loop with I starting at 0, stopping at team.team.length-1
+          // for loop with J starting at I+1, stopping at team.team.length
+          // lookup pairing count for members I and J
+          // add to pairingCount
+        // add pairingCount to team as prop
       })
     })
 }
