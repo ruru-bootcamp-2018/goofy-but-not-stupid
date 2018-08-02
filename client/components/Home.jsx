@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {getUsers, getUserData} from '../apiClient'
+import { Link } from 'react-router-dom'
+import { getUsers, getUserData } from '../apiClient'
 import User from './User'
 
 
@@ -8,7 +8,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          users: [],
+            users: [],
         }
 
         this.userClick = this.userClick.bind(this);
@@ -17,27 +17,25 @@ class Home extends React.Component {
     componentDidMount() {
         getUsers()
             .then((res) => {
-            // console.log(res)
                 this.setState({
                     users: res.users
                 })
             })
+            // err catching?
     }
 
     userClick(name) {
-        console.log(`clicked ${name}`)
-        // console.log(this.state.users)
         getUserData(name)
             .then((finalData) => {
-            this.setState({
-                activeUser: finalData
+                this.setState({
+                    activeUser: finalData
+                })
             })
-            // console.log({finalData})
-            })
-    }
+            // err catching?
+        }
 
 
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <div className='row first'>
@@ -59,14 +57,14 @@ class Home extends React.Component {
 
                     {
                         !this.state.activeUser &&
-                            <div className='nine columns'>
+                        <div className='nine columns'>
                             <img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
-                            </div>
+                        </div>
                     }
 
                     {
                         this.state.activeUser &&
-                            <User user={this.state.activeUser}/>
+                        <User user={this.state.activeUser} />
                     }
                 </div>
             </React.Fragment>
