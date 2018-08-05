@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getUsers, getUserData } from '../apiClient'
+
 import User from './User'
+import Intro from './Intro'
+import Footer from './Footer'
 
 
 class Home extends React.Component {
@@ -21,7 +24,7 @@ class Home extends React.Component {
                     users: res.users
                 })
             })
-            // err catching?
+        // err catching?
     }
 
     userClick(name) {
@@ -31,8 +34,8 @@ class Home extends React.Component {
                     activeUser: finalData
                 })
             })
-            // err catching?
-        }
+        // err catching?
+    }
 
 
     render() {
@@ -66,7 +69,12 @@ class Home extends React.Component {
                         this.state.activeUser &&
                         <User user={this.state.activeUser} />
                     }
+
+
                 </div>
+                <hr />
+                <Intro />
+                <Footer />
             </React.Fragment>
         )
     }
