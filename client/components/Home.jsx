@@ -43,7 +43,7 @@ class Home extends React.Component {
             <React.Fragment>
                 <div className='row first'>
                     <div className='twelve columns'>
-                        <Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1>DON'T H8, GENER8</h1></button></Link>
+                        <Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1>GENERATE TEAMS</h1></button></Link>
                     </div>
                 </div>
 

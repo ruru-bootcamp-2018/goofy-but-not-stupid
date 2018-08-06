@@ -3,6 +3,7 @@ import { getUsers, getTeams } from '../apiClient'
 
 import Teams from './Teams'
 import BackToHomeButton from './BackToHomeButton'
+import Footer from './Footer'
 
 class HomeTeams extends React.Component {
     constructor(props) {
@@ -98,7 +99,7 @@ class HomeTeams extends React.Component {
                     })
                 })
                 .catch(err => {
-                    console.log({err})
+                    console.log({ err })
                 })
         }
     }
@@ -106,32 +107,46 @@ class HomeTeams extends React.Component {
 
 
     render() {
+
+        //pre submit button
         if (!this.state.submitted) {
             return (
                 <React.Fragment>
                     <BackToHomeButton />
-                    <form onSubmit={this.handleSubmit} className='text-centered'>
-
-                        <label><h5 className='form-title'>How many teams?</h5><br />
-                            <input required type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
-                        </label>
-                        <br />
-                        <h5>How many people in each team?</h5>
-
-                        {this.state.preprocessedTeams.map((team, i) => {
-                            return <div key={`input${i + 1}`}>
-                                <label>Team {i + 1}<br />
-                                    <input type="number" name={i} onChange={this.handleTeamNumberChange}
-                                        value={this.state.preprocessedTeams[i].max} />
-                                </label>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='row'>
+                            <div className='six columns'>
+                                <h1>How many.</h1>
+                                <p>Enter how many teams you'd like to generate.</p>
+                                <input required type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
+                                <br />
                             </div>
-                        })}
-                        <input type="submit" className='button-primary' value='GENERATE TEAMS' />
+                            <div className='six columns'>
+                                <h1>Team size.</h1>
+                                <p>How many people should be in each team. Make sure this adds up to your total cohort size - {this.state.users.length}</p>
+                                {this.state.preprocessedTeams.map((team, i) => {
+                                    return <div key={`input${i + 1}`}>
+                                        <label>Team {i + 1}
+                                            <input type="number" name={i} onChange={this.handleTeamNumberChange}
+                                                value={this.state.preprocessedTeams[i].max} />
+                                        </label>
+                                    </div>
+                                })}
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='twelve columns'>
+                                <button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>GENERATE TEAMS</button>
+                            </div>
+                        </div>
                     </form>
+                    <Footer />
                 </React.Fragment>
             )
         }
 
+        //post submit button
         else return (
             <React.Fragment>
                 <BackToHomeButton />
