@@ -26,29 +26,19 @@ export function loginUser (creds) {
 export function requestLogin (creds) {
     return {
         type: 'LOGIN_REQUEST',
-        isFetching: true,
-        isAuthenticated: false
     }
 }
 
 export function receiveLogin (user) {
     return {
         type: 'LOGIN_SUCCESS',
-        isFetching: false,
-        isAuthenticated: true,
         user
     }
 }
 
-
-// gap for unwritten funcs
-
-
 export function loginError(message) {
     return {
       type: 'LOGIN_FAILURE',
-      isFetching: false,
-      isAuthenticated: false,
       message
     }
   }

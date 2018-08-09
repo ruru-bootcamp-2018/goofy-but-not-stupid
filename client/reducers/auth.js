@@ -1,9 +1,12 @@
+import { isAuthenticated } from '../utils/auth'
+
 const initialState = {
     isFetching: false,
-    isAuthenticated: null,
+    isAuthenticated: isAuthenticated(),
     user: null,
-    errorMessage: ''
 }
+
+///
 
 export default function auth(state = initialState, action) {
     switch (action.type) {
@@ -34,6 +37,20 @@ export default function auth(state = initialState, action) {
                 isFetching: false,
                 isAuthenticated: false,
                 user: null
+            }
+        case 'REGISTER_REQUEST':
+            return {
+                ...state,
+                isFetching: true,
+                isAuthenticated: false,
+                errorMessage: ''
+            }
+        case 'REGISTER_FAILURE':
+            return {
+                ...state,
+                isFetching: false,
+                isAuthenticated: false,
+                errorMessage: action.message
             }
         default:
             return state
