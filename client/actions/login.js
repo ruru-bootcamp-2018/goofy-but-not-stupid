@@ -15,7 +15,8 @@ export function loginUser (creds) {
             .set('Accept', 'application/json')
             .then(res => {
                 const userInfo = saveUserToken(res.body.token) 
-                dispatch(receiveLogin(userInfo))
+                dispatch(receiveLogin(userInfo) )
+                goToHome()
             })
             .catch(err => {
                 dispatch(loginError(err.response.body.message))
@@ -43,3 +44,6 @@ export function loginError(message) {
     }
   }
 
+function goToHome() {
+    document.location = '/#/'
+}

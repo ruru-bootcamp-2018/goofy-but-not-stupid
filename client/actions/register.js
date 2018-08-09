@@ -17,6 +17,7 @@ export function registerUserRequest(creds) {
             .then(res => {
                 const userInfo = saveUserToken(res.body.token) 
                 dispatch(receiveLogin(userInfo))
+                goToHome()
             })
             .catch(err => {
                 dispatch(registerError(err.response.body.message))
@@ -35,4 +36,8 @@ function registerError(message) {
         type: 'REGISTER_FAILURE',
         message
     })
+}
+
+function goToHome() {
+    document.location = '/#/'
 }

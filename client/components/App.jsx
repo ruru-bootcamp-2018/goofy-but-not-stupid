@@ -5,7 +5,9 @@ import Home from './Home'
 import HomeTeams from './HomeTeams'
 import Login from './Login'
 import Register from './Register'
+import Nav from './Nav'
 
+///
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className='app'>
+        <Nav />
         <Route exact path='/' component={Home} />
         <Route exact path='/teams' component={HomeTeams} />
         <Route exact path='/login' component={Login} />
