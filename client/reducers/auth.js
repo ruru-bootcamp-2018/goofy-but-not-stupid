@@ -31,6 +31,12 @@ export default function auth(state = initialState, action) {
                 isAuthenticated: false,
                 errorMessage: action.message
             }
+        case 'LOGOUT_REQUEST':
+            return {
+                ...state,
+                isFetching: true,
+                isAuthenticated: true
+            }
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
