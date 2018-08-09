@@ -1,5 +1,10 @@
-const rootUrl = '/api/v1/'
 import request from 'superagent'
+
+import {saveUserToken} from '../utils/auth'
+
+const rootUrl = '/api/v1/'
+
+///
 
 export function loginUser (creds) {
     return dispatch => {
@@ -9,8 +14,8 @@ export function loginUser (creds) {
             .send(creds)
             .set('Accept', 'application/json')
             .then(res => {
-                // save user token - gets full user info
-                // dispatch login received - passes full user info
+                const userInfo = saveUserToken(res.body.token) 
+                dispatch(receiveLogin(userInfo))
             })
             .catch(err => {
                 dispatch(loginError(err.response.body.message))
@@ -23,6 +28,15 @@ export function requestLogin (creds) {
         type: 'LOGIN_REQUEST',
         isFetching: true,
         isAuthenticated: false
+    }
+}
+
+export function receiveLogin (user) {
+    return {
+        type: 'LOGIN_SUCCESS',
+        isFetching: false,
+        isAuthenticated: true,
+        user
     }
 }
 
