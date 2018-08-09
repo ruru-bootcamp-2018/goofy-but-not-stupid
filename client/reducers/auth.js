@@ -15,7 +15,7 @@ export default function auth(state = initialState, action) {
                 ...state,
                 isFetching: true,
                 isAuthenticated: false,
-                errorMessage: ''
+                errorMessage: null
             }
         case 'LOGIN_SUCCESS':
             return {
@@ -43,7 +43,7 @@ export default function auth(state = initialState, action) {
                 ...state,
                 isFetching: true,
                 isAuthenticated: false,
-                errorMessage: ''
+                errorMessage: null
             }
         case 'REGISTER_FAILURE':
             return {

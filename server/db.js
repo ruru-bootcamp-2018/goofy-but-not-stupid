@@ -22,16 +22,36 @@ function getUserData (name) {
           return userData;
         })
     })
-}
-
-function getRelationships() {
-  return db('relationships').select()
-}
-
-function getUserRelationships(id) {
+  }
+  
+  function getRelationships() {
+    return db('relationships').select()
+  }
+  
+  function getUserRelationships(id) {
   return db('relationships')
-    .where('id_one', id)
-    .orWhere('id_two', id)
+  .where('id_one', id)
+  .orWhere('id_two', id)
+}
+
+
+function accountExists (account) {
+  return db('accounts')
+  .where(account)
+  .then(accountOrNot => {
+    if (accountOrNot) return true; else return false
+  })
+}
+
+function getAccountByUsername (username) {
+  return db('accounts')
+  .where({username})
+  .first()
+}
+
+function createAccount (account) {
+  return db('accounts')
+  .insert(account)
 }
 
 module.exports = {
@@ -39,5 +59,8 @@ module.exports = {
   getUser,
   getRelationships,
   getUserRelationships,
-  getUserData
+  getUserData,
+  accountExists,
+  getAccountByUsername,
+  createAccount
 }
