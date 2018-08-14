@@ -10,8 +10,8 @@ const Nav = (props) => (
     <div className='row'>
         <div className='twelve columns'>
             {props.auth.isAuthenticated 
-                ? <p className='centered'>Hi {props.auth.user.username} - <Link onClick={props.dispatch(logoutUser())}>logout</Link></p>
-                : <Redirect to='/login'>login</Redirect>
+                ? <p className='centered'>Hi {props.auth.user.username} - <Link onClick={props.dispatch(logoutUser())}>Logout</Link></p>
+                : <Redirect to='/login'/>
             }
         </div>
     </div>

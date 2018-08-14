@@ -20,8 +20,8 @@ class Login extends React.Component {
 
     submit(e) {
         e.preventDefault()
-        let { username, password } = this.state
-        this.props.dispatch(loginUser({ username, password }))
+        let creds = this.state
+        this.props.dispatch(loginUser(creds))
     }
 
     render() {

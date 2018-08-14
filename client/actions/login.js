@@ -1,21 +1,21 @@
 import request from 'superagent'
 
-import {saveUserToken} from '../utils/auth'
+import { saveUserToken } from '../utils/auth'
 
 const rootUrl = '/api/v1/'
 
 ///
 
-export function loginUser (creds) {
+export function loginUser(creds) {
     return dispatch => {
         dispatch(requestLogin())
         return request
-            .post(rootUrl+'auth/login')
+            .post(rootUrl + 'auth/login')
             .send(creds)
             .set('Accept', 'application/json')
             .then(res => {
-                const userInfo = saveUserToken(res.body.token) 
-                dispatch(receiveLogin(userInfo) )
+                const userInfo = saveUserToken(res.body.token)
+                dispatch(receiveLogin(userInfo))
                 goToHome()
             })
             .catch(err => {
@@ -24,13 +24,13 @@ export function loginUser (creds) {
     }
 }
 
-export function requestLogin (creds) {
+export function requestLogin(creds) {
     return {
         type: 'LOGIN_REQUEST',
     }
 }
 
-export function receiveLogin (user) {
+export function receiveLogin(user) {
     return {
         type: 'LOGIN_SUCCESS',
         user
@@ -39,10 +39,10 @@ export function receiveLogin (user) {
 
 export function loginError(message) {
     return {
-      type: 'LOGIN_FAILURE',
-      message
+        type: 'LOGIN_FAILURE',
+        message
     }
-  }
+}
 
 function goToHome() {
     document.location = '/#/'

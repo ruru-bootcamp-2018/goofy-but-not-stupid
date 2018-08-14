@@ -20,6 +20,7 @@ router.post('/team', (req, res) => {
 })
 
 router.get('/', (req, res) => {
+  
   db.getUsers()
     .then(users => {
       res.json({users})
