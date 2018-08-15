@@ -11,12 +11,12 @@ router.post('/', (req, res) => {
     })
 })
 
-router.get('/:name', (req, res) => {
-  let name = req.params.name
-  db.getUserData(name)
-    .then(userData => {
-      res.json(userData)
-    })
-})
+// router.get('/:name', (req, res) => {
+//   let name = req.params.name
+//   db.getUserData(name)
+//     .then(userData => {
+//       res.json(userData)
+//     })
+// })
 
 module.exports = router

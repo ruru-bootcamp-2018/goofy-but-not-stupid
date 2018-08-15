@@ -10,12 +10,12 @@ export function getUsers (account_id) {
     })
 }
 
-export function getUserData (name) {
-  return request.get('/api/v1/users/'+name)
-    .then(res => {
-      return res.body
-    })
-}
+// export function getUserData (name) {
+//   return request.get('/api/v1/users/'+name)
+//     .then(res => {
+//       return res.body
+//     })
+// }
 
 export function getTeams (rawTeams) {
   return request
