@@ -88,7 +88,7 @@ class HomeTeams extends React.Component {
             alert(`Nope! Current total amount of people in teams is ${totalMaxes}. Please make this add up to the total amount of people in the cohort, ${users.length}.`)
             return
         } else {
-            getTeams(this.state.preprocessedTeams)
+            getTeams(this.state.preprocessedTeams, this.props.users.users)
                 .then((newTeams) => {
                     let namedTeams = newTeams.map((team) => {
                         return team.team.map((person) => {

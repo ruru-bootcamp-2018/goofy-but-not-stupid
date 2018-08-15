@@ -17,10 +17,10 @@ import request from 'superagent'
 //     })
 // }
 
-export function getTeams (rawTeams) {
+export function getTeams (rawTeams, users) {
   return request
     .post('/api/v1/teams')
-    .send({rawTeams})
+    .send({rawTeams, users})
     .set('Accept', 'application/json')
     .then(res => {
       return res.body.newTeams
