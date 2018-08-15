@@ -2,15 +2,18 @@ import request from 'superagent'
 const rootUrl = '/api/v1/users/'
 
 
-export function getUsers () {
-  return request.get(rootUrl)
+export function getUsers (account_id) {
+  return request
+    .post('/api/v1/users/')
+    .send({account_id})
+    .set('Accept', 'application/json')
     .then(res => {
       return res.body
     })
 }
 
 export function getUserData (name) {
-  return request.get(rootUrl+name)
+  return request.get('/api/v1/users/'+name)
     .then(res => {
       return res.body
     })
@@ -18,7 +21,7 @@ export function getUserData (name) {
 
 export function getTeams (rawTeams) {
   return request
-    .post(rootUrl+'team')
+    .post('/api/v1/teams')
     .send({rawTeams})
     .set('Accept', 'application/json')
     .then(res => {
@@ -35,8 +38,7 @@ export function getRandomName () {
 }
 
 export function getPoki () {
-  // TODO convert to backend api func
-  return request.get(rootUrl+'poki')
+  return request.get('/api/v1/api/poki')
     .then(res => {
       return res.body
     })

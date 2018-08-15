@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
 import { getUsers, getUserData } from '../apiClient'
 
 import User from './User'
@@ -18,7 +19,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        getUsers()
+        getUsers(this.props.auth.user.account_id)
             .then((res) => {
                 this.setState({
                     users: res.users
@@ -80,5 +81,6 @@ class Home extends React.Component {
     }
 }
 
+const mapStateToProps = ({auth}) => {auth}
 
-export default Home
+export default connect(mapStateToProps)(Home)

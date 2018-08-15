@@ -3,8 +3,8 @@ const config = require('../knexfile').development
 
 const db = knex(config)
 
-function getUsers () {
-  return db('users').select()
+function getUsers (account_id) {
+  return db('users').where({account_id})
 }
 
 function getUser (name) {
