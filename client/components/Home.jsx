@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getUsers } from '../apiClient'
+import { getUsers } from '../actions/users'
 
 import User from './User'
 import Intro from './Intro'
@@ -12,20 +12,13 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: [],
         }
 
         this.userClick = this.userClick.bind(this);
     }
 
     componentDidMount() {
-        getUsers(this.props.auth.user.id)
-            .then((res) => {
-                this.setState({
-                    users: res.users
-                })
-            })
-        // err catching?
+        this.props.dispatch(getUsers(this.props.auth.user.id))
     }
 
     userClick(user) {
@@ -36,6 +29,7 @@ class Home extends React.Component {
 
 
     render() {
+        const users = this.props.users.users
         return (
             <React.Fragment>
                 <div className='row first'>
@@ -49,7 +43,7 @@ class Home extends React.Component {
                 <div className='row'>
                     <div className='three columns'>
                         <ul>
-                            {this.state.users.map((user) => {
+                            {users.map((user) => {
                                 return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
                             })}
                         </ul>
@@ -66,7 +60,6 @@ class Home extends React.Component {
                         this.state.activeUser &&
                         <User user={this.state.activeUser} />
                     }
-
 
                 </div>
                 <hr />

@@ -1,10 +1,8 @@
 const express = require('express')
 const db = require('../db')
 const router = express.Router()
-
 const issueToken = require('../auth/token')
 
-///
 
 router.post('/login', login, issueToken)
 

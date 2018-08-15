@@ -1,16 +1,11 @@
 import request from 'superagent'
-
 import { saveUserToken } from '../utils/auth'
-
-const rootUrl = '/api/v1/'
-
-///
 
 export function loginUser(creds) {
     return dispatch => {
         dispatch(requestLogin())
         return request
-            .post(rootUrl + 'auth/login')
+            .post('/api/v1/auth/login')
             .send(creds)
             .set('Accept', 'application/json')
             .then(res => {
