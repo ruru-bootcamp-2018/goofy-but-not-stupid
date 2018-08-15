@@ -19,7 +19,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        getUsers(this.props.auth.user.account_id)
+        getUsers(this.props.auth.user.id)
             .then((res) => {
                 this.setState({
                     users: res.users
