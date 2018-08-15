@@ -71,5 +71,4 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = ({ auth, users }) => { auth, users }
-
 export default connect(mapStateToProps)(Home)

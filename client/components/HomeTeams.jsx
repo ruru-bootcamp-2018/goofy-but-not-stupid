@@ -1,5 +1,7 @@
 import React from 'react'
-import { getUsers, getTeams } from '../apiClient'
+import {connect} from 'react-redux'
+import { getTeams } from '../apiClient'
+import {getUsers} from '../actions/users'
 
 import Teams from './Teams'
 import BackToHomeButton from './BackToHomeButton'
@@ -8,48 +10,48 @@ import Footer from './Footer'
 class HomeTeams extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            submitted: false,
+            teamAmount: 3,
+            preprocessedTeams: []
+        }
 
         this.handleTeamAmountChange = this.handleTeamAmountChange.bind(this)
         this.handleTeamNumberChange = this.handleTeamNumberChange.bind(this)
         this.setTeams = this.setTeams.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
-        this.state = {
-            users: [],
-            submitted: false,
-            teamAmount: 3,
-            preprocessedTeams: []
-        }
     }
 
     componentDidMount() {
-        getUsers()
-            .then((res) => {
-                this.setState({
-                    users: res.users
-                })
-            })
-            .then(() => {
-                this.setTeams()
-            })
+        // TODO: double check - assuming it converts empty array to falsy
+        const usersAreFetched = !!this.props.users.users
+        if (!usersAreFetched) {
+            // TODO: double check async dispatch can .then
+            this.props.dispatch(getUsers(this.props.auth.user.id))
+                .then(() => {
+                    this.setTeams()
+                })   
+        }
     }
-
 
     handleTeamAmountChange(e) {
         e.preventDefault()
         let key = e.target.name
+        // need string for display purposes in render()
         let newTeamAmountForStringPurposes = e.target.value
+        // need integer for calculus
         let newTeamAmountForRoundingPurposes = Number(e.target.value)
         this.setTeams(newTeamAmountForRoundingPurposes)
         this.setState({ [key]: newTeamAmountForStringPurposes })
     }
 
     setTeams(newTeamAmount) {
+        let users = this.props.users.users
         let teamAmount = newTeamAmount || this.state.teamAmount
-        let rounding = this.state.users.length % teamAmount
+        let rounding = users.length % teamAmount
         let arr = []
         for (let i = 0; i < teamAmount; i++) {
-            let max = Math.floor(this.state.users.length / teamAmount)
+            let max = Math.floor(users.length / teamAmount)
             if (rounding > 0) {
                 max++
                 rounding--
@@ -73,16 +75,17 @@ class HomeTeams extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
+        let users = this.props.users.users
 
-        // processing teams for backend
-        this.state.preprocessedTeams.forEach(i => {
-            i.max = Number(i.max)
-            i.team = []
+        // preprocessing teams for backend
+        this.state.preprocessedTeams.forEach(t => {
+            t.max = Number(t.max)
+            t.team = []
         })
 
         let totalMaxes = this.state.preprocessedTeams.reduce((acc, i) => acc + i.max, 0)
-        if (totalMaxes != this.state.users.length) {
-            alert(`Nope! Current total amount of people in teams is ${totalMaxes}. Please make this add up to the total amount of people in the cohort, ${this.state.users.length}.`)
+        if (totalMaxes != users.length) {
+            alert(`Nope! Current total amount of people in teams is ${totalMaxes}. Please make this add up to the total amount of people in the cohort, ${users.length}.`)
             return
         } else {
             getTeams(this.state.preprocessedTeams)
@@ -123,7 +126,7 @@ class HomeTeams extends React.Component {
                             </div>
                             <div className='six columns'>
                                 <h1>Team size.</h1>
-                                <p>How many people should be in each team. Make sure this adds up to your total cohort size - {this.state.users.length}</p>
+                                <p>How many people should be in each team. Make sure this adds up to your total cohort size - {this.props.users.users.length}</p>
                                 {this.state.preprocessedTeams.map((team, i) => {
                                     return <div key={`input${i + 1}`}>
                                         <label>Team {i + 1}
@@ -161,5 +164,5 @@ class HomeTeams extends React.Component {
     }
 }
 
-
-export default HomeTeams
+const mapStateToProps = ({auth, users}) => {auth, users}
+export default connect(mapStateToProps)(HomeTeams)

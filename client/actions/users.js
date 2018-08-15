@@ -10,6 +10,7 @@ export function getUsers (account_id) {
             .then(res => {
                 const users = res.body.users
                 dispatch(receiveUsers(users))
+                return
             })
             .catch(err => {
                 dispatch(usersError(err.response.body.message))
