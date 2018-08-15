@@ -107,8 +107,6 @@ class HomeTeams extends React.Component {
         }
     }
 
-
-
     render() {
 
         //pre submit button

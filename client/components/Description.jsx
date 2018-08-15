@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Intro = (props) => (
+const Description = (props) => (
     <React.Fragment>
         <div className='row first'>
             <div className='six columns'>
@@ -20,4 +20,4 @@ const Intro = (props) => (
     </React.Fragment>
 )
 
-export default Intro
+export default Description

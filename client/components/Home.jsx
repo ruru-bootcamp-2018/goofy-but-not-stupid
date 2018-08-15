@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getUsers } from '../actions/users'
 
 import User from './User'
-import Intro from './Intro'
+import Description from './Description'
 import Footer from './Footer'
 
 
@@ -63,7 +63,7 @@ class Home extends React.Component {
 
                 </div>
                 <hr />
-                <Intro />
+                <Description />
                 <Footer />
             </React.Fragment>
         )
