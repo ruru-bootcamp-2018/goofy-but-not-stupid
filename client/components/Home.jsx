@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux'
-import { getUsers, getUserData } from '../apiClient'
+import { connect } from 'react-redux'
+import { getUsers } from '../apiClient'
 
 import User from './User'
 import Intro from './Intro'
@@ -28,14 +28,10 @@ class Home extends React.Component {
         // err catching?
     }
 
-    userClick(name) {
-        getUserData(name)
-            .then((finalData) => {
-                this.setState({
-                    activeUser: finalData
-                })
-            })
-        // err catching?
+    userClick(user) {
+        this.setState({
+            activeUser: user
+        })
     }
 
 
@@ -54,7 +50,7 @@ class Home extends React.Component {
                     <div className='three columns'>
                         <ul>
                             {this.state.users.map((user) => {
-                                return <li key={user.id} onClick={() => this.userClick(user.name)}><a href="#">{user.name}</a></li>
+                                return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
                             })}
                         </ul>
                     </div>
@@ -81,6 +77,6 @@ class Home extends React.Component {
     }
 }
 
-const mapStateToProps = ({auth}) => {auth}
+const mapStateToProps = ({ auth }) => { auth }
 
 export default connect(mapStateToProps)(Home)

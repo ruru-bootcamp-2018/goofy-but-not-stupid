@@ -1,6 +1,4 @@
 import request from 'superagent'
-const rootUrl = '/api/v1/users/'
-
 
 export function getUsers (account_id) {
   return request
