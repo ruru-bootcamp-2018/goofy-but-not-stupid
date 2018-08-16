@@ -6,7 +6,7 @@ function makeTeams(cohort, teams) {
     .then((relationships) => {
       let possibleTeams = []
       for (let i = 0; i <= 100; i++) {
-        possibleTeams.push(makePossibleTeam(cohort, teams.map(o => Object.assign({}, o, {team: []})), relationships))
+        possibleTeams.push(makePossibleTeam(cohort, teams.map(t => Object.assign({}, t, {team: []})), relationships))
       }
       return possibleTeams
         .sort((a, b) => a.fairness-b.fairness)

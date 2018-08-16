@@ -15,13 +15,17 @@ router.post('/', (req, res) => {
 })
 
 router.post('/add', (req, res) => {
-  const group = req.body
+  let group = req.body
   db.addGroup(group)
     .then(groupWithId => {
-      res.status(200).json(groupWithId)
+      group.id = groupWithId.id
+      db.addRelationships(group)
+        .then(() => {
+          res.status(200).json(group)
+        })
     })
     .catch(err => {
-      res.status(500).json({message: 'Server error while attempting to add group'})
+      res.status(500).json({message: 'Server error while attempting to add group or relatonships'})
     })
 })
 
