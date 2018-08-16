@@ -7,9 +7,13 @@ const Nav = (props) => (
     <div className='row'>
         <div className='twelve columns'>
             {props.auth.isAuthenticated 
-                ? <p className='centered'>Hi {props.auth.user.username} - 
-                    <Link to='/profile'>edit profile</Link>, <Link onClick={props.dispatch(logoutUser())}>logout</Link>
-                </p>
+                ? document.location == '/#/profile' 
+                    ? <p className='centered'>Hi {props.auth.user.username} - 
+                        <Link to='/'>home</Link>, <Link onClick={props.dispatch(logoutUser())}>logout</Link>
+                    </p>
+                    : <p className='centered'>Hi {props.auth.user.username} - 
+                        <Link to='/profile'>edit profile</Link>, <Link onClick={props.dispatch(logoutUser())}>logout</Link>
+                    </p>
                 : <Redirect to='/login'/>
             }
         </div>
