@@ -7,9 +7,9 @@ function getUsers(account_id) {
   return db('users').where({ account_id })
 }
 
-function getUser(name) {
-  return db('users').select().where({ name }).first()
-}
+// function getUser(name) {
+//   return db('users').select().where({ name }).first()
+// }
 
 // function getUserData (name) {
 //   let userData = {}
@@ -24,21 +24,22 @@ function getUser(name) {
 //     })
 //   }
 
-function getRelationships() {
-  return db('relationships').select()
+function getRelationships(account_id) {
+  return db('relationships').where({account_id})
 }
 
-function getUserRelationships(id) {
-  return db('relationships')
-    .where('id_one', id)
-    .orWhere('id_two', id)
-}
+// function getUserRelationships(id) {
+//   return db('relationships')
+//     .where('id_one', id)
+//     .orWhere('id_two', id)
+// }
 
 
 function accountExists(account) {
   return db('accounts')
     .where(account)
     .then(accountOrNot => {
+      // TODO: double check
       if (accountOrNot) return true; else return false
     })
 }
@@ -56,9 +57,9 @@ function createAccount(account) {
 
 module.exports = {
   getUsers,
-  getUser,
+  // getUser,
   getRelationships,
-  getUserRelationships,
+  // getUserRelationships,
   // getUserData,
   accountExists,
   getAccountByUsername,

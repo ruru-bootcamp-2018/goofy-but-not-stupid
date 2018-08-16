@@ -2,7 +2,7 @@ const db = require('./db')
 const shuffle = require('shuffle-array')
 
 function makeTeams(cohort, teams) {
-  return db.getRelationships()
+  return db.getRelationships(cohort[0].account_id) // passing account_id
     .then((relationships) => {
       let possibleTeams = []
       for (let i = 0; i <= 100; i++) {

@@ -14,6 +14,10 @@ router.post('/', (req, res) => {
     })
 })
 
+router.post('/add', (req, res) => {
+  const user = req.body
+})
+
 // router.get('/:name', (req, res) => {
 //   let name = req.params.name
 //   db.getUserData(name)
