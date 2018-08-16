@@ -6,6 +6,7 @@ import HomeTeams from './HomeTeams'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
+import Profile from './Profile'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <div className='app'>
         <Nav />
         <Route exact path='/' component={Home} />
+        <Route exact path='/profile' component={Profile} />
         <Route exact path='/teams' component={HomeTeams} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
