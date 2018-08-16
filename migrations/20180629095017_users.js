@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('agility')
     table.string('name')
     table.string('profile_pic')
-    table.string('phrases')
+    table.string('phrase')
   })
 };
 

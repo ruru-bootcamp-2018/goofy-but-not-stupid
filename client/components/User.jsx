@@ -43,7 +43,7 @@ class User extends React.Component {
 
         <div className="three columns user">
 
-          <h1>{this.props.user.name}</h1>
+          <h2>{this.props.user.name}</h2>
 
           <p className="item"><b>Agility:  </b>
             {this.props.user.agility}
@@ -52,7 +52,7 @@ class User extends React.Component {
             {this.state.ability}
           </p>
 
-          <p className="item"><b>Key Phrase: </b>{this.props.user.phrases}</p>
+          <p className="item"><b>Key Phrase: </b>{this.props.user.phrase}</p>
         </div>
       </React.Fragment>
     )
