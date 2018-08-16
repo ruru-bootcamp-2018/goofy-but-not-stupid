@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUsers } from '../actions/users'
+import {getGroups} from '../actions/groups'
 
 import User from './User'
 import Description from './Description'
@@ -19,6 +20,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(getUsers(this.props.auth.user.id))
+        this.props.dispatch(getGroups(this.props.auth.user.id))
     }
 
     userClick(user) {

@@ -18,5 +18,4 @@ const Nav = (props) => (
 )
 
 const mapStateToProps = ({auth}) => {auth}
-
 export default connect(mapStateToProps)(Nav)
