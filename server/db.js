@@ -76,7 +76,7 @@ function editGroup(group) {
     .update(group)
 }
 
-function delgroup(id) {
+function delGroup(id) {
   return db('groups')
     .where({id})
     .del()
@@ -116,6 +116,13 @@ function createAccount(account) {
 module.exports = {
   getUsers,
   // getUser,
+  addUser,
+  editUser,
+  delUser,
+  getGroups,
+  addGroup,
+  editGroup, 
+  delGroup,
   getRelationships,
   // getUserRelationships,
   // getUserData,
