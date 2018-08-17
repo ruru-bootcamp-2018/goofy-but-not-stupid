@@ -14,6 +14,7 @@ class Profile extends React.Component {
 	}
 
 	switchTabs(e) {
+		// TODO: double check innerHTML of parent element works + toLowerCase method
 		this.setState({
 			tab: e.target.innerHTML.toLowerCase()
 		})
@@ -28,19 +29,26 @@ class Profile extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className='row'>
-					<div className='twelve columns'>
-						<button className='btn btn--stripe btn--radius centered' onClick={this.switchTabs}>GROUPS</button>
-						<button className='btn btn--stripe btn--radius centered' onClick={this.switchTabs}>PEOPLE</button>
-						<hr/>
-
-						{
-							this.state.tab == 'groups'
-								? <GroupEdit goToPeopleTab={this.goToPeopleTab}/>
-								: <PeopleEdit/>
-						}
-
+				<div className='columns is-multiline'>
+          <div className='column is-12'>
+            <div className="tabs is-boxed is-left">
+							<ul>
+								<li className={`${this.state.tab == 'groups' && 'is-active'}`} onClick={this.switchTabs}>
+                  <a>GROUPS</a>
+                </li>
+								<li className={`${this.state.tab == 'people' && 'is-active'}`} onClick={this.switchTabs}>
+                  <a>PEOPLE</a>
+                </li>
+							</ul>
+						</div>
 					</div>
+
+					{
+						this.state.tab == 'groups'
+							? <GroupEdit goToPeopleTab={this.goToPeopleTab}/>
+							: <PeopleEdit/>
+					}
+
 				</div>
 			</React.Fragment>
 		)

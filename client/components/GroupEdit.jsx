@@ -13,22 +13,18 @@ class GroupEdit extends React.Component {
 		return (
 			<React.Fragment>
 				{
-					this.props.users.users.length > 0
+					this.props.users.users.length < 1
 						? <React.Fragment>
-								<div className='row'>
-									<div className='three columns'>
-										{/* whole thing */}
-									</div>
+								<div className='column is-3'>
+									<p>You need to <Link onClick={this.props.goToPeopleTab()}>add some people!</Link></p>
+								</div>
+								<div className='column is-9'>
+									<img src="todo" alt="toby morris's deal with it thingy"/>
 								</div>
 							</React.Fragment>
 						: <React.Fragment>
-								<div className='row'>
-									<div className='three columns'>
-										<p>You need to <Link onClick={this.props.goToPeopleTab()}>add some people!</Link></p>
-									</div>
-									<div className='nine columns'>
-										<img src="todo" alt="toby morris's deal with it thingy"/>
-									</div>
+								<div className='column is-3'>
+									{/* whole thing */}
 								</div>
 							</React.Fragment>
 				}

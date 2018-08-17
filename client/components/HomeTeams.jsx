@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { getTeams } from '../apiClient'
-import {getUsers} from '../actions/users'
+import { getUsers } from '../actions/users'
 
 import Teams from './Teams'
 import BackToHomeButton from './BackToHomeButton'
@@ -30,7 +30,7 @@ class HomeTeams extends React.Component {
             this.props.dispatch(getUsers(this.props.auth.user.id))
                 .then(() => {
                     this.setTeams()
-                })   
+                })
         }
     }
 
@@ -114,30 +114,31 @@ class HomeTeams extends React.Component {
             return (
                 <React.Fragment>
                     <BackToHomeButton />
-                    <form onSubmit={this.handleSubmit}>
-                        <div className='row'>
-                            <div className='six columns'>
-                                <h1>How many.</h1>
+                    <form className='form' onSubmit={this.handleSubmit}>
+                        <div className='columns'>
+                            <div className='column is-6'>
+                                <h1 className='title is-1'>How many</h1>
                                 <p>Enter how many teams you'd like to generate.</p>
-                                <input required type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
-                                <br />
+                                <input required className='input' type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
                             </div>
-                            <div className='six columns'>
-                                <h1>Team size.</h1>
+                            <div className='column is-6'>
+                                <h1 className='title is-1'>Team size</h1>
                                 <p>How many people should be in each team. Make sure this adds up to your total cohort size - {this.props.users.users.length}</p>
                                 {this.state.preprocessedTeams.map((team, i) => {
-                                    return <div key={`input${i + 1}`}>
-                                        <label>Team {i + 1}
-                                            <input type="number" name={i} onChange={this.handleTeamNumberChange}
-                                                value={this.state.preprocessedTeams[i].max} />
-                                        </label>
-                                    </div>
+                                    return (
+                                        <div key={`input${i + 1}`}>
+                                            <label>Team {i + 1}
+                                                <input className='input' type="number" name={i} onChange={this.handleTeamNumberChange}
+                                                    value={this.state.preprocessedTeams[i].max} />
+                                            </label>
+                                        </div>
+                                    )
                                 })}
                             </div>
                         </div>
                         <hr />
-                        <div className='row'>
-                            <div className='twelve columns'>
+                        <div className='columns'>
+                            <div className='column is-12'>
                                 <button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>GENERATE TEAMS</button>
                             </div>
                         </div>
@@ -151,7 +152,7 @@ class HomeTeams extends React.Component {
         else return (
             <React.Fragment>
                 <BackToHomeButton />
-                <div className='row'>
+                <div className='columns is-multiline'>
                     {
                         this.state.teams &&
                         <Teams teams={this.state.teams} teamNumber={this.state.teamNumber} />
@@ -162,5 +163,5 @@ class HomeTeams extends React.Component {
     }
 }
 
-const mapStateToProps = ({auth, users}) => {auth, users}
+const mapStateToProps = ({ auth, users }) => { auth, users }
 export default connect(mapStateToProps)(HomeTeams)

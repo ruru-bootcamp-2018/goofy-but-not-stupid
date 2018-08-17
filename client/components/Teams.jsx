@@ -24,21 +24,23 @@ class Teams extends React.Component {
   }
 
   howMany() {
-    if (this.props.teamNumber == 6) {
-      return 'two'
-    } 
-    else if (this.props.teamNumber == 5) {
-      return 'two'
-    } 
-    else if (this.props.teamNumber == 4) {
-      return 'three'
-    } 
-    else if (this.props.teamNumber == 3) {
-      return 'four'
-    } 
-    else if (this.props.teamNumber == 2) {
-      return 'six'
-    } 
+    if (this.props.teamNumber < 5) return String(Math.floor(this.props.teamNumber/12))
+    else return '2'
+    // if (this.props.teamNumber == 6) {
+    //   return '2'
+    // } 
+    // else if (this.props.teamNumber == 5) {
+    //   return '2'
+    // } 
+    // else if (this.props.teamNumber == 4) {
+    //   return '3'
+    // } 
+    // else if (this.props.teamNumber == 3) {
+    //   return '4'
+    // } 
+    // else if (this.props.teamNumber == 2) {
+    //   return '6'
+    // } 
   }
 
 
@@ -48,9 +50,9 @@ class Teams extends React.Component {
       <React.Fragment>
         {this.state.teamNames && this.props.teams.map((team, i) => {
           return (
-            <div className={`${this.howMany()} columns`} key={i}>
+            <div className={`column is-${this.howMany()}`} key={i}>
               <br />
-              <h3><strong>{this.state.teamNames[i]}</strong></h3>
+              <h3 className='title is-3'><strong>{this.state.teamNames[i]}</strong></h3>
               <br />
               <ul>
                 {team.map((person) => {
@@ -65,6 +67,5 @@ class Teams extends React.Component {
     )
   }
 }
-
 
 export default Teams

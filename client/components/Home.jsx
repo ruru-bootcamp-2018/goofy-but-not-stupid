@@ -34,17 +34,17 @@ class Home extends React.Component {
 		const users = this.props.users.users
 		return (
 			<React.Fragment>
-				<div className='row first'>
-					<div className='twelve columns'>
-						<Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1>GENERATE TEAMS</h1></button></Link>
+				<div className='columns'>
+					<div className='column is-12'>
+						<Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1 className='title is-1'>GENERATE TEAMS</h1></button></Link>
 					</div>
 				</div>
 
 				<hr />
 
-				<div className='row'>
-					<div className='three columns'>
-						<h1>People</h1>
+				<div className='columns'>
+					<div className='column is-3'>
+						<h1 className='title is-1'>People</h1>
 						<ul>
 							{users.map((user) => {
 								return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
@@ -54,7 +54,7 @@ class Home extends React.Component {
 
 					{
 						!this.state.activeUser &&
-						<div className='nine columns'>
+						<div className='column is-9'>
 							<img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
 						</div>
 					}
