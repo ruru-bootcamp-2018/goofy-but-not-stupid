@@ -37,22 +37,21 @@ class User extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className='six columns'>
+        <div className='column is-6'>
           <img className='user-img' src={this.props.user.profile_pic} />
         </div>
 
-        <div className="three columns user">
+        <div className="column is-3 user">
+          <h2 className='title is-2'>{this.props.user.name}</h2>
 
-          <h1>{this.props.user.name}</h1>
-
-          <p className="item"><b>Agility:  </b>
+          <p className="item"><b>Agility: </b>
             {this.props.user.agility}
           </p>
           <p className="caps item"><b>Special ability: </b>
             {this.state.ability}
           </p>
 
-          <p className="item"><b>Key Phrase: </b>{this.props.user.phrases}</p>
+          <p className="item"><b>Key Phrase: </b>{this.props.user.phrase}</p>
         </div>
       </React.Fragment>
     )

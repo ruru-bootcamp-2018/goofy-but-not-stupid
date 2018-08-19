@@ -93,6 +93,9 @@
 
    /* ///////////////////////////////////////// */
 
+.custom-width-container {
+    max-width: 960px;
+}
 
 .spacer {
     height: 80px;
