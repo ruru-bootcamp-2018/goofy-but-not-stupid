@@ -163,5 +163,5 @@ class HomeTeams extends React.Component {
     }
 }
 
-const mapStateToProps = ({ auth, users }) => { auth, users }
+const mapStateToProps = ({ auth, users }) => ({ auth, users })
 export default connect(mapStateToProps)(HomeTeams)

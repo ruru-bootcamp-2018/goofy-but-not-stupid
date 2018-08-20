@@ -4,11 +4,11 @@ import {get, set} from './localstorage'
 
 export function isAuthenticated() {
     const token = get('token')
-
+    
     if (token) {
         const payload = decode(token)
         const expiry = payload.exp
-
+        
         if (expiry < new Date().getTime() / 1000) {
             removeUser()
             return false

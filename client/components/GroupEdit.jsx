@@ -84,5 +84,5 @@ class GroupEdit extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth, users, groups }) => { auth, users, groups }
+const mapStateToProps = ({ auth, users, groups }) => ({ auth, users, groups })
 export default connect(mapStateToProps)(GroupEdit)

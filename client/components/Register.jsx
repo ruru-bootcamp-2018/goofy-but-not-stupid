@@ -68,5 +68,5 @@ class Register extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth }) => {auth}
+const mapStateToProps = ({ auth }) => ({auth})
 export default connect(mapStateToProps)(Register)
