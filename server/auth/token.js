@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-
 const db = require('../db')
 
 ///
@@ -15,7 +14,7 @@ function issue(req, res) {
         })
         .catch(err => {
             return res.status(403).json({
-                message: 'Authentication failed.'
+                message: `Authentication failed: ${err.message}`
             })
         })
 }

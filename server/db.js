@@ -137,14 +137,14 @@ function tickUpRelationship(rel) {
 //     .orWhere('id_two', id)
 // }
 
-function accountExists(account) {
-  return db('accounts')
-    .where(account)
-    .then(accountOrNot => {
-      // TODO: double check
-      if (accountOrNot) return true; else return false
-    })
-}
+// function accountExists(account) {
+//   return db('accounts')
+//     .where(account)
+//     .then(accountOrNot => {
+//       // TODO: double check
+//       if (accountOrNot) return true; else return false
+//     })
+// }
 
 function getAccountByUsername(username) {
   return db('accounts')
@@ -171,7 +171,7 @@ module.exports = {
   getRelationships,
   addRelationships,
   // getUserRelationships,
-  accountExists,
+  // accountExists,
   getAccountByUsername,
   createAccount
 }
