@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { logoutUser } from '../actions/logout'
 
 const Nav = (props) => {
-    console.log(props)
     return (
         <div className='columns first'>
             <div className='column is-12'>

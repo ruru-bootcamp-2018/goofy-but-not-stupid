@@ -71,7 +71,7 @@ class GroupEdit extends React.Component {
 									</label>
 
 									<h4 className='title is-4'>Total: {this.state.people.length}</h4>
-									<button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>SUBMIT</button>
+									<button className='btn btn--stripe btn--radius is-centered' onClick={this.handleSubmit}>SUBMIT</button>
 								</form>
 							</div>
 

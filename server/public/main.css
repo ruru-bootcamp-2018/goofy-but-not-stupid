@@ -94,19 +94,12 @@
    /* ///////////////////////////////////////// */
 
 .custom-width-container {
-    max-width: 960px;
+    max-width: 1100px;
+    margin:auto;
 }
 
 .spacer {
     height: 80px;
-}
-
-hr {
-    padding-top: 10px;
-}
-
-.text-centered {
-    text-align: center;
 }
 
 .centered {

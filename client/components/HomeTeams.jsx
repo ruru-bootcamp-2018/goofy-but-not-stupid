@@ -139,7 +139,7 @@ class HomeTeams extends React.Component {
                         <hr />
                         <div className='columns'>
                             <div className='column is-12'>
-                                <button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>GENERATE TEAMS</button>
+                                <button className='btn btn--stripe btn--radius is-centered' onClick={this.handleSubmit}>GENERATE TEAMS</button>
                             </div>
                         </div>
                     </form>

@@ -33,7 +33,7 @@ class Register extends React.Component {
 		const { auth } = this.props
 
 		return (
-			<div className='columns centered'>
+			<div className='columns is-centered'>
 				<div className='column is-4'>
 					<form className='form' onSubmit={this.submit}>
 						<h1 className=" title is-1 has-text-centered">Register</h1>
@@ -59,7 +59,7 @@ class Register extends React.Component {
 						<p className='has-text-centered'>Already have an account? <Link to='/login'>Login here</Link></p>
 
 						<hr />
-						<input className="input" value='Register' type="submit" />
+						<input className="button" value='Register' type="submit" />
 					</form>
 
 				</div>
