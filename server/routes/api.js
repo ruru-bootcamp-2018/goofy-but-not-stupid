@@ -9,3 +9,5 @@ router.get('/poki', (req, res) => {
             res.json(poki)
         })
 })
+
+module.exports = router

@@ -37,3 +37,5 @@ function register (req, res, next) {
             res.status(500).json({message: 'Server error while attempting to register'})
         })
 }
+
+module.exports = router
