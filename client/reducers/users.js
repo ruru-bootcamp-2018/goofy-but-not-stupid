@@ -28,6 +28,15 @@ export default function users(state = initialState, action) {
             }
         case 'REMOVE_USERS':
             return initialState
+        case 'RECEIVE_USER_SUCCESS':
+            let newUsers = state.users.map(u => u)
+            newUsers.push(action.user)
+            return {
+                ...state,
+                isFetching: false,
+                users: newUsers,
+                fetched: true
+            }
         default:
             return state
     }

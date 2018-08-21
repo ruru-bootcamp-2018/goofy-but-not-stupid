@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {addUser} from '../actions/users'
 
 const initialState = {
     name: '',
@@ -41,8 +42,21 @@ class PeopleEdit extends React.Component {
     // }
 
     handleSubmit(e) {
-    	e.preventDefault()
-    	// submitty stuff
+        e.preventDefault()
+        if (this.state.name === '') { // handle name requirement
+            this.setState({errorMessage: 'Please fill this out'})
+            return
+        } else delete this.state.errorMessage
+
+    	const user = {
+            account_id: this.props.auth.user.id,
+            name: this.state.name,
+            agility: this.state.agility,
+            phrase: this.state.phrase,
+            profile_pic: this.state.profile_pic
+        }
+        this.props.dispatch(addUser(user))
+        this.setState(initialState)
     }
 
     render() {
@@ -54,6 +68,7 @@ class PeopleEdit extends React.Component {
                         <label>Name
                             <input className='input' type="text" name='name' value={this.state.name} onChange={this.updateDetails}/>
                         </label>
+                        {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
 
                         <label>Profile pic
                             <input className='input' type="text" name='profile_pic' value={this.state.profile_pic} onChange={this.updateDetails}/>
@@ -78,7 +93,7 @@ class PeopleEdit extends React.Component {
                             : <p>Click them to edit</p>
                     }
                     {this.props.users.users.map((p) => {
-                        return <li key={p.id} onClick={() => this.editUser(p)}><a href="#">{p.name}</a></li>
+                        return <li key={p.id} onClick={() => this.editUser(p)}><Link to="/profile">{p.name}</Link></li>
                     })}
                     <p>Total people: {this.props.users.users.length}</p>
                 </div>

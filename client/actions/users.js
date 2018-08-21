@@ -37,3 +37,28 @@ function usersError (message) {
         message
     }
 }
+
+export function addUser (user) {
+    return dispatch => {
+        dispatch(requestUsers())
+        return request
+            .post('/api/v1/users/add')
+            .send(user)
+            .set('Accept', 'application/json')
+            .then(res => {
+                console.log(res.body)
+                dispatch(receiveUser(res.body))
+                return
+            })
+            .catch(err => {
+                dispatch(usersError(err.response.body.message))
+            })
+    }
+}
+
+function receiveUser (user) {
+    return {
+        type: 'RECEIVE_USER_SUCCESS',
+        user
+    }
+}

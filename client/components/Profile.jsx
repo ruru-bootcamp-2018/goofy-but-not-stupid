@@ -4,6 +4,7 @@ import { getUsers } from '../actions/users'
 import { getGroups } from '../actions/groups'
 import GroupEdit from './GroupEdit'
 import PeopleEdit from './PeopleEdit'
+import Footer from './Footer'
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -23,8 +24,6 @@ class Profile extends React.Component {
 	}
 
 	switchTabs(e) {
-		// TODO: double check innerHTML of parent element works + toLowerCase method
-		console.log(e.target.innerHTML.toLowerCase())
 		this.setState({
 			tab: e.target.innerHTML.toLowerCase()
 		})
@@ -60,6 +59,7 @@ class Profile extends React.Component {
 					}
 
 				</div>
+				<Footer />
 			</React.Fragment>
 		)
 	}
