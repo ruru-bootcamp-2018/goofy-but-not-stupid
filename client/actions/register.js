@@ -3,21 +3,17 @@ import request from 'superagent'
 import {receiveLogin} from './login'
 import {saveUserToken} from '../utils/auth'
 
-const rootUrl = '/api/v1/'
-
-///
-
 export function registerUserRequest(creds) {
     return (dispatch) => {
         dispatch(requestRegister())
         return request
-            .post(rootUrl + 'auth/login')
+            .post('/api/v1/auth/register')
             .send(creds)
             .set('Accept', 'application/json')
             .then(res => {
                 const userInfo = saveUserToken(res.body.token) 
                 dispatch(receiveLogin(userInfo))
-                goToHome()
+                goToProfile()
             })
             .catch(err => {
                 dispatch(registerError(err.response.body.message))
@@ -38,6 +34,6 @@ function registerError(message) {
     })
 }
 
-function goToHome() {
-    document.location = '/#/'
+function goToProfile() {
+    document.location = '/#/profile'
 }

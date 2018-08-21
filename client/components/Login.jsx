@@ -30,7 +30,7 @@ class Login extends React.Component {
 			<div className='columns is-centered'>
 				<div className='column is-4'>
 					<form className='form'>
-						<h1 className="title is-1 has-text-centered">Login</h1>
+						<h1 className="title is-1 has-text-centered">LOGIN</h1>
 						{auth.errorMessage
 							&& <p className="has-text-centered">{auth.errorMessage}</p>}
 						<hr />
@@ -45,7 +45,7 @@ class Login extends React.Component {
 						<p className='has-text-centered'>Don't have an account? <Link to='/register'>Create an account here</Link></p>
 
 						<hr />
-						<button className='button btn btn--stripe btn--radius centered is-fullwidth' onClick={this.submit}>Login</button>
+						<button className='button btn btn--stripe btn--radius centered is-fullwidth' onClick={this.submit}>LOGIN</button>
 					</form>
 				</div>
 			</div>

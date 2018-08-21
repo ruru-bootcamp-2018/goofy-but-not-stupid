@@ -36,7 +36,7 @@ class Home extends React.Component {
 			<React.Fragment>
 				<div className='columns'>
 					<div className='column is-12'>
-						<Link to='/teams'><button className="btn btn--stripe btn--radius is-centered"><h1 className='title is-1'>GENERATE TEAMS</h1></button></Link>
+						<h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">GENERATE TEAMS</button></Link></h1>
 					</div>
 				</div>
 
