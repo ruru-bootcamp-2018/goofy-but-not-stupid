@@ -26,27 +26,26 @@ class Login extends React.Component {
 
 	render() {
 		const { auth } = this.props
-
 		return (
-			<div className='columns centered'>
+			<div className='columns is-centered'>
 				<div className='column is-4'>
-					<form className='form' onSubmit={this.submit}>
-						<h1 className="title is-1 has-text-centered">Login</h1>
+					<form className='form'>
+						<h1 className="title is-1 has-text-centered">LOGIN</h1>
 						{auth.errorMessage
 							&& <p className="has-text-centered">{auth.errorMessage}</p>}
 						<hr />
 
 						<label className='label'>Username
-              <input required className="input" placeholder="Username" type="text" name="username" onChange={this.updateDetails} />
+              				<input required className="input" placeholder="Username" type="text" name="username" onChange={this.updateDetails} />
 						</label>
 
 						<label className='label'>Password
-              <input required className="input" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
+              				<input required className="input" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
 						</label>
 						<p className='has-text-centered'>Don't have an account? <Link to='/register'>Create an account here</Link></p>
 
 						<hr />
-						<input className="input" value='Login' type="submit" />
+						<button className='button btn btn--stripe btn--radius centered is-fullwidth' onClick={this.submit}>LOGIN</button>
 					</form>
 				</div>
 			</div>
@@ -54,5 +53,5 @@ class Login extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth }) => {auth}
+const mapStateToProps = ({ auth }) => ({ auth })
 export default connect(mapStateToProps)(Login)

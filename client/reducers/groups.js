@@ -1,7 +1,8 @@
 const initialState = {
     isFetching: false,
     groups: [],
-    errorMessage: null
+    errorMessage: null,
+    fetched: false
 }
 
 export default function groups(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function groups(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                groups: action.groups
+                groups: action.groups,
+                fetched: true
             }
         case 'GROUPS_FAILURE':
             return {
@@ -24,6 +26,8 @@ export default function groups(state = initialState, action) {
                 isFetching: false,
                 errorMessage: action.message
             }
+        case 'REMOVE_GROUPS':
+            return initialState
         default:
             return state
     }

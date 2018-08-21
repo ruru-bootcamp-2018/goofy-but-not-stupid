@@ -23,7 +23,6 @@ class Register extends React.Component {
 
 	submit(e) {
 		e.preventDefault()
-		e.target.reset() // look this up
 		let { password, confirm_password } = this.state
 		if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
 		this.props.dispatch(registerUserRequest(this.state))
@@ -33,33 +32,33 @@ class Register extends React.Component {
 		const { auth } = this.props
 
 		return (
-			<div className='columns centered'>
+			<div className='columns is-centered'>
 				<div className='column is-4'>
-					<form className='form' onSubmit={this.submit}>
-						<h1 className=" title is-1 has-text-centered">Register</h1>
+					<form className='form'>
+						<h1 className=" title is-1 has-text-centered">REGISTER</h1>
 						{auth.errorMessage
 							&& <p className="has-text-centered">{auth.errorMessage}</p>}
 						<hr />
 
 						<label className='label'>Username
-            	<input required className="input" placeholder="Username" type="text" name="username" onChange={this.updateDetails} />
+            				<input required className="input" placeholder="Username" type="text" name="username" onChange={this.updateDetails} />
 						</label>
 
 						<label className='label'>Email Address
-              <input required className="input" placeholder="Email Address" type="email" name="email_address" onChange={this.updateDetails} />
+              				<input required className="input" placeholder="Email Address" type="email" name="email_address" onChange={this.updateDetails} />
 						</label>
 
 						<label className='label'>Password
-              <input required className="input" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
+              				<input required className="input" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
 						</label>
 
 						<label className='label'>Confirm Password
-              <input required className="input" placeholder="One more time..." type="password" name="confirm_password" onChange={this.updateDetails} />
+              				<input required className="input" placeholder="One more time..." type="password" name="confirm_password" onChange={this.updateDetails} />
 						</label>
 						<p className='has-text-centered'>Already have an account? <Link to='/login'>Login here</Link></p>
 
 						<hr />
-						<input className="input" value='Register' type="submit" />
+						<button className='button btn btn--stripe btn--radius centered is-fullwidth' onClick={this.submit}>REGISTER</button>
 					</form>
 
 				</div>
@@ -68,5 +67,5 @@ class Register extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth }) => {auth}
+const mapStateToProps = ({ auth }) => ({auth})
 export default connect(mapStateToProps)(Register)

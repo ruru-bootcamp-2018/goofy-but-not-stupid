@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 import { getTeams } from '../apiClient'
 import { getUsers } from '../actions/users'
+import { getGroups } from '../actions/groups'
 
 import Teams from './Teams'
 import BackToHomeButton from './BackToHomeButton'
@@ -23,15 +25,13 @@ class HomeTeams extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: double check - assuming it converts empty array to falsy
-        const usersAreFetched = !!this.props.users.users
-        if (!usersAreFetched) {
-            // TODO: double check async dispatch can .then
+        if (!this.props.users.fetched) {
+            this.props.dispatch(getGroups(this.props.auth.user.id))
             this.props.dispatch(getUsers(this.props.auth.user.id))
                 .then(() => {
                     this.setTeams()
                 })
-        }
+        } else this.setTeams()
     }
 
     handleTeamAmountChange(e) {
@@ -85,7 +85,7 @@ class HomeTeams extends React.Component {
 
         let totalMaxes = this.state.preprocessedTeams.reduce((acc, i) => acc + i.max, 0)
         if (totalMaxes != users.length) {
-            alert(`Nope! Current total amount of people in teams is ${totalMaxes}. Please make this add up to the total amount of people in the cohort, ${users.length}.`)
+            alert(`Nope! The total amount of people in those teams is ${totalMaxes}. Please make this add up to the total amount of people in your cohort, ${users.length}.`)
             return
         } else {
             getTeams(this.state.preprocessedTeams, this.props.users.users)
@@ -107,6 +107,10 @@ class HomeTeams extends React.Component {
         }
     }
 
+    acceptTeams () {
+        alert("TODO: will add these groups to an account's group history so it takes it into account next time")
+    }
+
     render() {
 
         //pre submit button
@@ -114,16 +118,13 @@ class HomeTeams extends React.Component {
             return (
                 <React.Fragment>
                     <BackToHomeButton />
-                    <form className='form' onSubmit={this.handleSubmit}>
-                        <div className='columns'>
+                    <form className='form'>
+                        <div className='columns is-centered'>
                             <div className='column is-6'>
-                                <h1 className='title is-1'>How many</h1>
-                                <p>Enter how many teams you'd like to generate.</p>
+                                <h5 className='title is-5'>How many teams would you like?</h5>
                                 <input required className='input' type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
-                            </div>
-                            <div className='column is-6'>
-                                <h1 className='title is-1'>Team size</h1>
-                                <p>How many people should be in each team. Make sure this adds up to your total cohort size - {this.props.users.users.length}</p>
+                                <br/><br/>
+                                <h5 className='title is-5'>How many people per team?</h5>
                                 {this.state.preprocessedTeams.map((team, i) => {
                                     return (
                                         <div key={`input${i + 1}`}>
@@ -134,12 +135,12 @@ class HomeTeams extends React.Component {
                                         </div>
                                     )
                                 })}
+
                             </div>
                         </div>
-                        <hr />
                         <div className='columns'>
                             <div className='column is-12'>
-                                <button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>GENERATE TEAMS</button>
+                                <h1 className='title is-1'><button className='btn btn--stripe btn--radius centered btn--large' onClick={this.handleSubmit}>SUBMIT</button></h1>
                             </div>
                         </div>
                     </form>
@@ -155,13 +156,21 @@ class HomeTeams extends React.Component {
                 <div className='columns is-multiline'>
                     {
                         this.state.teams &&
-                        <Teams teams={this.state.teams} teamNumber={this.state.teamNumber} />
+                        <Teams teams={this.state.teams} teamNumber={this.state.teamNumber}/>
                     }
                 </div>
+                <hr/>
+                <div className='has-text-centered'>
+
+                    <Link to='#' onClick={this.acceptTeams}>Yesss! Accept teams</Link>
+                    <br/><br/>
+                    <Link to='#' onClick={this.handleSubmit}>Make new teams</Link>
+                </div>
+
             </React.Fragment>
         )
     }
 }
 
-const mapStateToProps = ({ auth, users }) => { auth, users }
+const mapStateToProps = ({ auth, users }) => ({ auth, users })
 export default connect(mapStateToProps)(HomeTeams)

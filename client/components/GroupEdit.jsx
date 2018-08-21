@@ -20,7 +20,7 @@ class GroupEdit extends React.Component {
 		this.setState({ users: this.props.users.users })
 	}
 
-	updateDetails() {
+	updateDetails(e) {
 		this.setState({ [e.target.name]: e.target.value })
 	}
 
@@ -41,11 +41,12 @@ class GroupEdit extends React.Component {
 				{
 					this.props.users.users.length < 1
 						? <React.Fragment>
-							<div className='column is-3'>
-								<p>You need to <Link onClick={this.props.goToPeopleTab()}>add some people!</Link></p>
+							<div className='column is-12'>
+								<p className='has-text-centered'>You need to <Link to='/profile' onClick={() => this.props.goToPeopleTab()}>add some people!!</Link></p>
 							</div>
-							<div className='column is-9'>
-								<img src="todo" alt="toby morris's deal with it thingy" />
+							<div className='column is-12'>
+								<img src="http://internationalrescue.com/wp-content/uploads/2014/05/21-international-rescue-illustrator-toby-morris.gif" alt="toby morris's deal with it thingy" />
+								<p>Credit - Toby Morris</p>
 							</div>
 						</React.Fragment>
 
@@ -53,29 +54,27 @@ class GroupEdit extends React.Component {
 							<div className='column is-3'>
 								<form className='form'>
 									<h1 className="title is-1 has-text-centered">Add  Group</h1>
-									{auth.errorMessage
+									{this.props.auth.errorMessage
 										&& <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
 									<hr />
 
 									<p>Click users from the list to add them to this group.</p>
 									<label className='label'>Group name
-              			<input required className="input" placeholder="e.g. the swiss potatoes" type="text" name="name" onChange={this.updateDetails} />
+              							<input required className="input" placeholder="e.g. the swiss potatoes" type="text" name="name" onChange={this.updateDetails} />
 									</label>
 
 									<label className='label'>People
-              			<ul>
+              							<ul>
 											{this.state.people.map(p => {
-												return <li key={user.id}><Link onClick={() => this.remove(user)}>{p.name}</Link></li>
+												return <li key={user.id}><Link to='/profile' onClick={() => this.remove(user)}>{p.name}</Link></li>
 											})}
 										</ul>
 									</label>
 
 									<h4 className='title is-4'>Total: {this.state.people.length}</h4>
-									<button className='btn btn--stripe btn--radius centered' onClick={this.handleSubmit}>SUBMIT</button>
+									<button className='btn btn--stripe btn--radius is-centered' onClick={this.handleSubmit}>SUBMIT</button>
 								</form>
 							</div>
-
-
 						</React.Fragment>
 				}
 
@@ -84,5 +83,5 @@ class GroupEdit extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth, users, groups }) => { auth, users, groups }
+const mapStateToProps = ({ auth, users, groups }) => ({ auth, users, groups })
 export default connect(mapStateToProps)(GroupEdit)

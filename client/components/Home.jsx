@@ -36,7 +36,7 @@ class Home extends React.Component {
 			<React.Fragment>
 				<div className='columns'>
 					<div className='column is-12'>
-						<Link to='/teams'><button className="btn btn--stripe btn--radius centered"><h1 className='title is-1'>GENERATE TEAMS</h1></button></Link>
+						<h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">GENERATE TEAMS</button></Link></h1>
 					</div>
 				</div>
 
@@ -45,17 +45,15 @@ class Home extends React.Component {
 				<div className='columns'>
 					<div className='column is-3'>
 						<h1 className='title is-1'>People</h1>
-						<ul>
-							{users.map((user) => {
-								return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
-							})}
-						</ul>
+						{users.map((user) => {
+							return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
+						})}
 					</div>
 
 					{
 						!this.state.activeUser &&
 						<div className='column is-9'>
-							<img className='centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
+							<img className='is-centered gif' src='https://media.giphy.com/media/3eP9HDIMwJVvGTdmNA/giphy.gif' />
 						</div>
 					}
 
@@ -73,5 +71,5 @@ class Home extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth, users }) => { auth, users }
+const mapStateToProps = ({ auth, users }) => ({ auth, users })
 export default connect(mapStateToProps)(Home)

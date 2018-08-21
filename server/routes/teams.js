@@ -13,3 +13,5 @@ router.post('/', (req, res) => {
       res.status(500).json({message: 'Server error making teams'})
     })
 })
+
+module.exports = router

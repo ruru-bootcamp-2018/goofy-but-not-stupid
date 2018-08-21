@@ -1,9 +1,9 @@
-import { isAuthenticated } from '../utils/auth'
+import { isAuthenticated, getUserTokenInfo } from '../utils/auth'
 
 const initialState = {
     isFetching: false,
     isAuthenticated: isAuthenticated(),
-    user: null,
+    user: getUserTokenInfo()
 }
 
 export default function auth(state = initialState, action) {

@@ -20,7 +20,7 @@
    
    button {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +29,7 @@
    }
    
    .btn {
+    width: auto;
     overflow: visible;
     margin: 0;
     padding: 0;
@@ -84,7 +85,11 @@
             animation: stripe-slide 12s infinite linear forwards;
    }
    .btn--large {
-    width: 50%;
+    width: auto;
+    color: #363636;
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.125;
    }
    .btn--radius {
     border-radius: 36px;
@@ -94,24 +99,22 @@
    /* ///////////////////////////////////////// */
 
 .custom-width-container {
-    max-width: 960px;
+    max-width: 1000px;
+    margin:auto;
 }
 
 .spacer {
     height: 80px;
 }
 
-hr {
-    padding-top: 10px;
-}
-
-.text-centered {
-    text-align: center;
-}
-
 .centered {
     display: block;
     margin: auto;
+}
+
+.multi-center {
+    display: inline-block;
+    text-align: center;
 }
 
 .form-title {
@@ -129,11 +132,7 @@ hr {
     margin: auto;
 }
 
-li {
-    margin-bottom: 5px;
-}
-
-.btn {
+.autobutton {
     width: auto;
     height: auto;
 }
@@ -147,5 +146,9 @@ p {
 }
 
 .first {
-    margin-top: 40px;;
+    margin-top: 20px;
+}
+
+.small-space {
+    margin-top: 20px;
 }
