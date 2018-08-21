@@ -29,6 +29,7 @@
    }
    
    .btn {
+    width: auto;
     overflow: visible;
     margin: 0;
     padding: 0;
@@ -109,6 +110,11 @@
 .centered {
     display: block;
     margin: auto;
+}
+
+.multi-center {
+    display: inline-block;
+    text-align: center;
 }
 
 .form-title {

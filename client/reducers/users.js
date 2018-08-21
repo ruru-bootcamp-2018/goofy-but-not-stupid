@@ -1,7 +1,8 @@
 const initialState = {
     isFetching: false,
     users: [],
-    errorMessage: null
+    errorMessage: null,
+    fetched: false
 }
 
 export default function users(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function users(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                users: action.users
+                users: action.users,
+                fetched: true
             }
         case 'USERS_FAILURE':
             return {
