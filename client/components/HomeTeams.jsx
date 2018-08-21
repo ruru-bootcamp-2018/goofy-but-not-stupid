@@ -26,7 +26,6 @@ class HomeTeams extends React.Component {
 
     componentDidMount() {
         if (!this.props.users.fetched) {
-            // TODO: double check async dispatch can .then
             this.props.dispatch(getGroups(this.props.auth.user.id))
             this.props.dispatch(getUsers(this.props.auth.user.id))
                 .then(() => {

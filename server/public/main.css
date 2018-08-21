@@ -99,7 +99,7 @@
    /* ///////////////////////////////////////// */
 
 .custom-width-container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin:auto;
 }
 
@@ -146,5 +146,9 @@ p {
 }
 
 .first {
+    margin-top: 20px;
+}
+
+.small-space {
     margin-top: 20px;
 }

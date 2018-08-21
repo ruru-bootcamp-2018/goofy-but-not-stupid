@@ -45,11 +45,9 @@ class Home extends React.Component {
 				<div className='columns'>
 					<div className='column is-3'>
 						<h1 className='title is-1'>People</h1>
-						<ul>
-							{users.map((user) => {
-								return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
-							})}
-						</ul>
+						{users.map((user) => {
+							return <li key={user.id} onClick={() => this.userClick(user)}><a href="#">{user.name}</a></li>
+						})}
 					</div>
 
 					{
