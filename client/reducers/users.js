@@ -24,6 +24,8 @@ export default function users(state = initialState, action) {
                 isFetching: false,
                 errorMessage: action.message
             }
+        case 'REMOVE_USERS':
+            return initialState
         default:
             return state
     }

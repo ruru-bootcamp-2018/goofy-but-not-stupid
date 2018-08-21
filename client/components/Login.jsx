@@ -26,7 +26,6 @@ class Login extends React.Component {
 
 	render() {
 		const { auth } = this.props
-
 		return (
 			<div className='columns is-centered'>
 				<div className='column is-4'>

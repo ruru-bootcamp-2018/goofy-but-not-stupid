@@ -24,6 +24,8 @@ export default function groups(state = initialState, action) {
                 isFetching: false,
                 errorMessage: action.message
             }
+        case 'REMOVE_GROUPS':
+            return initialState
         default:
             return state
     }
