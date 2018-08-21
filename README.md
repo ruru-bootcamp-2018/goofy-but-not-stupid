@@ -1,22 +1,12 @@
-# Fullstack boilerplate
+# Team Builder
 
-To get started:
+https://the-sorting-hat.herokuapp.com/
 
-```
-git clone https://github.com/dev-academy-challenges/boilerplate-fullstack [your-project-name]
-cd [your-project-name]
-yarn # to install dependencies
-yarn dev # to start the dev server
-```
+A web app to make better teams for EDA group projects where everyone is paired with the least people they have worked with before in past projects.
 
-You can find the server running on [http://localhost:3000](http://localhost:3000).
+Currently only set up for our mid-2018 EDA cohort tracking our group pairing history.
+- Select cohort members from the homepage list for more info. Currently querying the pokemon API (https://pokeapi.co/) to generate a special ability for each member for the funnies.
+- When you're ready to generate teams, hit the button, select how amount of teams and the number split among those teams and go! The team creation code will generate 100 teams in the configuration you requested, compare them on a number of axis and return the top one.
 
-This repo includes:
-
-* a single, simple API endpoint (`/api/v1/fruits`)
-* a single React component (`<App />`)
-* a fake database module (`db.js`)
-* an API client module (`apiClient.js`)
-* configuration for Jest and Enzyme (including JSDOM)
-* configuration for server-side debugging in VS Code
-* a single client-side test (`/tests/client/App.test.js`)
+### Up next...
+By late August, the app will be account-based so it can be used by any group. After you login, you'll have the ability to create a list of all your group members, input past project pairing history and dynamically generate the fairest possible team structure for you all so you get to work with the most new people. 🚀🚀🚀

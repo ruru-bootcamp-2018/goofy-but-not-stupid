@@ -1,31 +1,29 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1/users/'
+// export function getUsers (account_id) {
+//   return request
+//     .post('/api/v1/users/')
+//     .send({account_id})
+//     .set('Accept', 'application/json')
+//     .then(res => {
+//       return res.body
+//     })
+// }
 
-console.log(getRandomName());
+// export function getUserData (name) {
+//   return request.get('/api/v1/users/'+name)
+//     .then(res => {
+//       return res.body
+//     })
+// }
 
-export function getUsers () {
-  return request.get(rootUrl)
+export function getTeams (rawTeams, users) {
+  return request
+    .post('/api/v1/teams')
+    .send({rawTeams, users})
+    .set('Accept', 'application/json')
     .then(res => {
-      // console.log(res)
-      return res.body
-    })
-}
-
-export function getUserData (name) {
-  return request.get(rootUrl+name)
-    .then(res => {
-      // console.log(res.body) // should be userData obj
-      console.log('back to client side')
-      return res.body
-    })
-}
-
-export function getTeams () {
-  return request.get(rootUrl+'team')
-    .then(res => {
-      // console.log(res)
-      return res.body
+      return res.body.newTeams
     })
 }
 
@@ -35,4 +33,11 @@ export function getRandomName () {
   .then(res => {
     return res.body
   })
+}
+
+export function getPoki () {
+  return request.get('/api/v1/api/poki')
+    .then(res => {
+      return res.body
+    })
 }

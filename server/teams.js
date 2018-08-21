@@ -1,66 +1,63 @@
 const db = require('./db')
+const shuffle = require('shuffle-array')
 
-function processRelationships(teamSize) {
- return db.getRelationships().then(relationships => {
-    const lowestCount = relationships.reduce((acc, x) => {
-      if (x.count < acc) acc = x.count
-      return acc
-    }, relationships[0].count)
-    const highestCount = relationships.reduce((acc, x) => {
-      if (x.count > acc) acc = x.count
-      return acc
-    }, relationships[0].count)
-    let orderedArray = []
-    for (let i = lowestCount; i <= highestCount; i++) {
-      const result = relationships.filter(x => x.count == i)
-      orderedArray.push(result)
+function makeTeams(cohort, teams) {
+  return db.getRelationships(cohort[0].account_id) // passing account_id
+    .then((relationships) => {
+      let possibleTeams = []
+      for (let i = 0; i <= 100; i++) {
+        possibleTeams.push(makePossibleTeam(cohort, teams.map(t => Object.assign({}, t, {team: []})), relationships))
+      }
+      return possibleTeams
+        .sort((a, b) => a.fairness-b.fairness)
+        .slice(0, 20)
+        .sort((a, b) => a.totalPairings-b.totalPairings)[0]
+    })
+}
+
+function makePossibleTeam(cohort, teams, relationships) {
+  shuffle(cohort)
+  let targetTeamIndex = 0
+  let tempTeams = teams 
+  cohort.forEach(user => {
+    let userSorted = false
+    while (!userSorted) {
+      if (isTeamFull(tempTeams[targetTeamIndex])) {
+        targetTeamIndex == tempTeams.length - 1 ? targetTeamIndex = 0 : targetTeamIndex++
+      } else {
+        tempTeams[targetTeamIndex].team.push(user)
+        targetTeamIndex == tempTeams.length - 1 ? targetTeamIndex = 0 : targetTeamIndex++
+        userSorted = true
+      }
     }
-    orderedArray = orderedArray.concat.apply([], orderedArray)
-    const teams = makeTeams(teamSize)
+  })
 
-    return populateTeams(orderedArray, teams)
+  addPairingCounts(tempTeams, relationships)
+  let counts = tempTeams.map(team => team.pairingCount)
+  let possibleTeam = {
+    newTeams: tempTeams,
+    fairness: Math.max(...counts) - Math.min(...counts),
+    totalPairings: counts.reduce((acc, count) => acc + count)
+  }
+  return possibleTeam
+}
+
+function isTeamFull(team) {
+  return team.team.length == team.max
+}
+
+function addPairingCounts(teams, relationships) {
+  teams.forEach((team) => {
+    team.pairingCount = 0
+    for (let i = 0; i < team.team.length - 1; i++) {
+      for (let j = i + 1; j < team.team.length; j++) {
+        let rel = relationships.find(r => {
+          return ((r.id_one == team.team[i].id && r.id_two == team.team[j].id) || (r.id_one == team.team[j].id && r.id_two == team.team[i].id))
+        })
+        team.pairingCount += rel.count
+      }
+    }
   })
 }
 
-function makeTeams(teamSize) {
-  for (var teams=[]; teams.push([])<teamSize;){
-  }
-  return teams
-}
-
-function populateTeams(orderedArray, teams) {
-let count = 0
-  while (orderedArray.length) {
-    teams[count % teams.length].push(orderedArray[0])
-    count ++
-    orderedArray = orderedArray.filter(x => {
-      let a1b1 = x.id_one == orderedArray[0].id_one
-      let a1b2 = x.id_one == orderedArray[0].id_two
-      let a2b1 = x.id_two == orderedArray[0].id_one
-      let a2b2 = x.id_two == orderedArray[0].id_two
-      return !(a1b1 || a1b2 || a2b1 || a2b2)
-    })
-  }
-
-  const finalArray = []
-
-  for (var i = 0; i < teams.length; i++) {
-  let reduced = teams[i].reduce((acc, x) => {
-      acc.push(x.id_one, x.id_two)
-      return acc
-    }, [])
-    finalArray.push(reduced)
-}
-  let extraPeep = finalArray[0].pop()
-  finalArray[2].push(extraPeep)
-  finalArray[1].push(15)
-
-  return finalArray
-}
-
-
-module.exports = {
-  processRelationships,
-  makeTeams,
-  populateTeams
-}
+module.exports = makeTeams

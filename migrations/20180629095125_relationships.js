@@ -1,6 +1,8 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('relationships', table =>{
+  return knex.schema.createTableIfNotExists('relationships', table =>{
+    table.increments('id').primary()
+    table.integer('account_id')
     table.integer('id_one')
     table.integer('id_two')
     table.integer('count')
@@ -8,5 +10,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('relationships')
+  return knex.schema.dropTableIfExists('relationships')
 };

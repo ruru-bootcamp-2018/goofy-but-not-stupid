@@ -1,0 +1,34 @@
+const initialState = {
+    isFetching: false,
+    groups: [],
+    errorMessage: null,
+    fetched: false
+}
+
+export default function groups(state = initialState, action) {
+    switch (action.type) {
+        case 'GROUPS_REQUEST':
+            return {
+                ...state,
+                isFetching: true,
+                errorMessage: null
+            }
+        case 'GROUPS_SUCCESS':
+            return {
+                ...state,
+                isFetching: false,
+                groups: action.groups,
+                fetched: true
+            }
+        case 'GROUPS_FAILURE':
+            return {
+                ...state,
+                isFetching: false,
+                errorMessage: action.message
+            }
+        case 'REMOVE_GROUPS':
+            return initialState
+        default:
+            return state
+    }
+}

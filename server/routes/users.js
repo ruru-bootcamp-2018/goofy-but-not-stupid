@@ -1,51 +1,58 @@
 const express = require('express')
 const db = require('../db')
-const teams = require('../teams')
 
 const router = express.Router()
 
-// const cohort = {
-//   1: 'Dan',
-//   2: 'Rebecca D',
-//   3: 'Riki',
-//   4: 'Reuben',
-//   5: 'Brad',
-//   6: 'Cate',
-//   7: 'Tay',
-//   8: 'Rebecca L',
-//   9: 'Ross',
-//   10: 'Stan',
-//   11: 'Anton',
-//   12: 'Hayden',
-//   13: 'Kelly',
-//   14: 'Phoenix',
-//   15: 'Cliff'
-// }
-
-router.get('/team', (req, res) => {
-  teams.processRelationships(3)
-  .then(team => {
-    res.json(team)
-  })
-})
-
-router.get('/', (req, res) => {
-  db.getUsers()
+router.post('/', (req, res) => {
+  const {account_id} = req.body 
+  db.getUsers(account_id)
     .then(users => {
-      // console.log(users)
-      res.json({users})
+      res.status(200).json({users})
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Server error while attempting to fetch users'})
     })
 })
 
-router.get('/:name', (req, res) => {
-  console.log('made it to server side')
-  let name = req.params.name
-  db.getUserData(name)
-    .then(userData => {
-      res.json(userData)
+router.post('/add', (req, res) => {
+  const user = req.body
+  db.addUser(user)
+    .then(userWithId => {
+      res.status(200).json(userWithId)
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Server error while attempting to add user'})
     })
 })
 
+router.post('/edit', (req, res) => {
+  const user = req.body
+  db.editUser(user)
+    .then(() => {
+      res.sendStatus(200)
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Server error while attempting to edit user'})
+    })
+})
 
+router.post('/del', (req, res) => {
+  const id = req.body.id
+  db.delUser(id)
+    .then(() => {
+      res.sendStatus(200)
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Server error while attempting to delete user'})
+    })
+})
+
+// router.get('/:name', (req, res) => {
+//   let name = req.params.name
+//   db.getUserData(name)
+//     .then(userData => {
+//       res.json(userData)
+//     })
+// })
 
 module.exports = router
