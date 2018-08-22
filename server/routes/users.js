@@ -32,6 +32,7 @@ router.post('/edit', (req, res) => {
       res.sendStatus(200)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({message: 'Server error while attempting to edit user'})
     })
 })

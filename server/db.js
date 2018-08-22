@@ -29,7 +29,6 @@ function addUser(user) {
   return db('users')
     .insert(user)
     .then(inserts => {
-      // TODO: double check - want it to return the user with their new id
       return db('users')
         .where(user)
         .first()
@@ -37,8 +36,9 @@ function addUser(user) {
 }
 
 function editUser(user) {
-  const id = user.id
+  const {id} = user
   return db('users')
+    .select()
     .where({ id })
     .update(user)
 }

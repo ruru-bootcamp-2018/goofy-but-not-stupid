@@ -46,7 +46,6 @@ export function addUser (user) {
             .send(user)
             .set('Accept', 'application/json')
             .then(res => {
-                console.log(res.body)
                 dispatch(receiveUser(res.body))
                 return
             })
@@ -59,6 +58,30 @@ export function addUser (user) {
 function receiveUser (user) {
     return {
         type: 'RECEIVE_USER_SUCCESS',
+        user
+    }
+}
+
+export function editUser (user) {
+    return dispatch => {
+        dispatch(requestUsers())
+        return request
+            .post('/api/v1/users/edit')
+            .send(user)
+            .set('Accept', 'application/json')
+            .then(res => {
+                dispatch(receiveEditedUser(user))
+                return
+            })
+            .catch(err => {
+                dispatch(usersError(err.response.body.message))
+            })
+    }
+}
+
+function receiveEditedUser (user) {
+    return {
+        type: 'RECEIVE_EDITEDUSER_SUCCESS',
         user
     }
 }
