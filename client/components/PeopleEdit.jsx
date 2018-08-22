@@ -85,6 +85,8 @@ class PeopleEdit extends React.Component {
                 {this.state.addingUser &&
                     <div className='column is-6'>
                         <h3 className='title is-3'>Add person</h3>
+                        <hr />
+                        
                         <form className='form'>
                             <label>Name
                             <input className='input' type="text" name='name' value={this.state.name} onChange={this.updateDetails} />
