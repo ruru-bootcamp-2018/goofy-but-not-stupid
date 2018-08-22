@@ -11,6 +11,7 @@ export default function users(state = initialState, action) {
             return {
                 ...state,
                 isFetching: true,
+                fetched: false,
                 errorMessage: null
             }
         case 'USERS_SUCCESS':
@@ -35,6 +36,16 @@ export default function users(state = initialState, action) {
                 ...state,
                 isFetching: false,
                 users: newUsers,
+                fetched: true
+            }
+        case 'RECEIVE_EDITEDUSER_SUCCESS':
+            return {
+                ...state,
+                isFetching: false,
+                users: state.users.map((u) => {
+                    if (u.id === action.user.id) return action.user
+                    else return u
+                }),
                 fetched: true
             }
         default:
