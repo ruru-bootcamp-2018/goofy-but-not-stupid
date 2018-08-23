@@ -29,7 +29,6 @@ function addUser(user) {
   return db('users')
     .insert(user)
     .then(inserts => {
-      // TODO: double check - want it to return the user with their new id
       return db('users')
         .where(user)
         .first()
@@ -37,8 +36,9 @@ function addUser(user) {
 }
 
 function editUser(user) {
-  const id = user.id
+  const { id } = user
   return db('users')
+    .select()
     .where({ id })
     .update(user)
 }
@@ -53,20 +53,18 @@ function getGroups(account_id) {
   return db('groups')
     .where({ account_id })
     .then(groupsArray => {
-      return groupsArray.map(g => JSON.parse(g.people))
+      return groupsArray.map(g => {
+        g.people = JSON.parse(g.people)
+        return g
+      })
     })
 }
 
 function addGroup(group) {
-  JSON.stringify(group.people)
+  const tempGroup = { ...group }
+  tempGroup.people = JSON.stringify(tempGroup.people, null, 2)
   return db('groups')
-    .insert(group)
-    .then(inserts => {
-      // TODO: double check - want it to return the group with their new id
-      return db('groups')
-        .where(group)
-        .first()
-    })
+    .insert(tempGroup)
 }
 
 function editGroup(group) {
@@ -89,18 +87,13 @@ function getRelationships(account_id) {
 
 function addRelationships(group) {
   const account_id = group.account_id
-  return new Promise((resolve, reject) => {
-    for (let i = 0; i < group.people.length - 1; i++) {
-      for (let j = i + 1; j < group.people.length; j++) {
-        addRelationship(group.people[i].id, group.people[j].id, account_id)
-          .catch(err => {
-            console.log('deep in untested waters - trying to add relationship for members in a new group')
-            reject(err)
-          })
-      }
+  let promises = []
+  for (let i = 0; i < group.people.length - 1; i++) {
+    for (let j = i + 1; j < group.people.length; j++) {
+      promises.push(addRelationship(group.people[i].id, group.people[j].id, account_id))
     }
-    resolve()
-  })
+  }
+  return Promise.all(promises)
 }
 
 function addRelationship(id_one, id_two, account_id) {
@@ -109,10 +102,9 @@ function addRelationship(id_one, id_two, account_id) {
   return db('relationships')
     .where(rel)
     .orWhere(reversedRel)
-    .then(relOrNot => {
-      //TODO: double check falsy empty array thing
-      if (!!relOrNot) {
-        tickUpRelationship(relOrNot[0])
+    .then(rels => {
+      if (rels.length > 0) {
+        return tickUpRelationship(rels[0])
       }
       else {
         rel.account_id = account_id
@@ -125,10 +117,11 @@ function addRelationship(id_one, id_two, account_id) {
 
 function tickUpRelationship(rel) {
   const id = rel.id
-  rel.count++
+  const count = rel.count+1
   return db('relationships')
+    .select()
     .where({id})
-    .update(rel)
+    .update({count})
 }
 
 // function getUserRelationships(id) {
