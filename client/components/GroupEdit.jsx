@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addGroup } from '../actions/groups'
+import { addGroup, delGroup } from '../actions/groups'
 
 const initialState = {
   name: '',
@@ -65,8 +65,8 @@ class GroupEdit extends React.Component {
     this.setState({ ...initialState })
   }
 
-  deleteGroup(group) {
-
+  deleteGroup(groupId) {
+    this.props.dispatch(delGroup(groupId))
   }
 
   render() {
@@ -141,7 +141,7 @@ class GroupEdit extends React.Component {
 
             : <React.Fragment>
               {this.props.groups.groups.map(g => {
-                return <li key={g.id} onClick={() => this.deleteGroup(g)}><Link to="/profile">{g.name}</Link></li>
+                return <li key={g.id} onClick={() => this.deleteGroup(g.id)}><Link to="/profile">{g.name}</Link></li>
               })}
             </React.Fragment>
           }

@@ -39,6 +39,13 @@ export default function groups(state = initialState, action) {
                 groups: newGroups,
                 fetched: true
             }
+        case 'DEL_GROUP_SUCCESS':
+            return {
+                ...state, 
+                isFetching: false,
+                groups: state.groups.filter(g => g.id != action.id),
+                fetched: true
+            }
         default:
             return state
     }

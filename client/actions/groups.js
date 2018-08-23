@@ -60,3 +60,27 @@ function receiveGroup (group) {
         group
     }
 }
+
+export function delGroup(id) {
+    return dispatch => {
+        dispatch(requestGroups())
+        return request
+            .post('/api/v1/groups/del')
+            .send({id})
+            .set('Accept', 'application/json')
+            .then(res => {
+                dispatch(delGroupSuccess(id))
+                return
+            })
+            .catch(err => {
+                dispatch(groupsError(err.response.body.message))
+            })
+    }
+}
+
+function delGroupSuccess(id) {
+    return {
+        type: 'DEL_GROUP_SUCCESS',
+        id
+    }
+}
