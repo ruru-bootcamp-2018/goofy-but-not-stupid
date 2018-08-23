@@ -21,6 +21,7 @@ class PeopleEdit extends React.Component {
         this.handleAdd = this.handleAdd.bind(this)
         this.editUser = this.editUser.bind(this)
         this.handleEdit = this.handleEdit.bind(this)
+        this.backToAdd = this.backToAdd.bind(this)
     }
 
     updateDetails(e) {
@@ -39,6 +40,10 @@ class PeopleEdit extends React.Component {
         })
     }
 
+    backToAdd () {
+        this.setState({...initialState})
+    }
+
     handleAdd(e) {
         e.preventDefault()
         if (this.state.name === '') { // handle name requirement
@@ -54,7 +59,7 @@ class PeopleEdit extends React.Component {
             profile_pic: this.state.profile_pic
         }
         this.props.dispatch(addUser(user))
-        this.setState({...initialState})
+        this.setState({ ...initialState })
     }
 
     handleEdit(e) {
@@ -73,74 +78,79 @@ class PeopleEdit extends React.Component {
             profile_pic: this.state.profile_pic
         }
         this.props.dispatch(editUser(user))
-        this.setState({...initialState})
+        this.setState({ ...initialState })
     }
 
     render() {
         return (
             <React.Fragment>
-                <div className='column is-12'>
-                    <h1 className='space-below title is-1 has-text-centered'>Set up your people</h1>
-                </div>
                 {this.state.addingUser &&
-                    <div className='column is-6'>
-                        <h3 className='title is-3'>Add person</h3>
-                        <hr />
-                        
-                        <form className='form'>
-                            <label>Name
+                    <React.Fragment>
+                        <div className='column is-12'>
+                            <h1 className='title is-1'>Add person</h1>
+                        </div>
+
+                        <div className='column is-6'>
+                            <form className='form'>
+                                <label className='label'>Name
                             <input className='input' type="text" name='name' value={this.state.name} onChange={this.updateDetails} />
-                            </label>
-                            {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
+                                </label>
+                                {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
 
-                            <label>Profile pic
+                                <label className='label'>Profile pic
                             <input className='input' type="text" name='profile_pic' value={this.state.profile_pic} onChange={this.updateDetails} />
-                            </label>
+                                </label>
 
-                            <label>Agility
+                                <label className='label'>Agility
                             <input className='input' type="text" name='agility' value={this.state.agility} onChange={this.updateDetails} />
-                            </label>
+                                </label>
 
-                            <label>Key phrase
+                                <label className='label'>Key phrase
                             <input className='input' type="text" name='phrase' value={this.state.phrase} onChange={this.updateDetails} />
-                            </label>
-                            <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
-                            <button className='small-space btn btn--stripe btn--radius centered' onClick={this.handleAdd}>SUBMIT</button>
-                        </form>
-                    </div>
+                                </label>
+                                <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
+                                <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleAdd}>SUBMIT</button></h1>
+                            </form>
+                        </div>
+                    </React.Fragment>
                 }
 
                 {this.state.editingUser &&
-                    <div className='column is-6'>
-                        <h3 className='title is-3'>Edit {this.state.name}</h3>
-                        <form className='form'>
-                            <label>Name
+                    <React.Fragment>
+                        <div className='column is-12'>
+                            <h1 className='title is-1'>Edit {this.state.name}</h1>
+                        </div>
+                        <div className='column is-6'>
+                            <form className='form'>
+                                <label className='label'>Name
                             <input className='input' type="text" name='name' value={this.state.name} onChange={this.updateDetails} />
-                            </label>
-                            {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
+                                </label>
+                                {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
 
-                            <label>Profile pic
+                                <label className='label'>Profile pic
                             <input className='input' type="text" name='profile_pic' value={this.state.profile_pic} onChange={this.updateDetails} />
-                            </label>
+                                </label>
 
-                            <label>Agility
+                                <label className='label'>Agility
                             <input className='input' type="text" name='agility' value={this.state.agility} onChange={this.updateDetails} />
-                            </label>
+                                </label>
 
-                            <label>Key phrase
+                                <label className='label'>Key phrase
                             <input className='input' type="text" name='phrase' value={this.state.phrase} onChange={this.updateDetails} />
-                            </label>
-                            <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
-                            <button className='small-space btn btn--stripe btn--radius centered' onClick={this.handleEdit}>SUBMIT</button>
-                        </form>
-                    </div>
+                                </label>
+                                <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
+                                <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleEdit}>SUBMIT</button></h1>
+                                <p className='has-text-centered'><Link to='profile' onClick={this.backToAdd}>Back to adding users</Link></p>
+                            </form>
+                        </div>
+                    </React.Fragment>
                 }
 
                 <div className='column is-6'>
                     {
                         this.props.users.users.length < 1
                             ? <p>No people yet!</p>
-                            : <p>Click them to edit</p>
+                            : <p>Click person to edit</p>
                     }
                     {this.props.users.users.map((p) => {
                         return <li key={p.id} onClick={() => this.editUser(p)}><Link to="/profile">{p.name}</Link></li>

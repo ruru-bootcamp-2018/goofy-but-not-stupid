@@ -1,91 +1,137 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class GroupEdit extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			name: '',
-			people: [],
-			users: []
-		}
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      people: []
+    }
 
-		this.updateDetails = this.updateDetails.bind(this)
-		this.remove = this.remove.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
-	}
+    this.updateDetails = this.updateDetails.bind(this)
+    this.removeUser = this.removeUser.bind(this)
+    this.addUser = this.addUser.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.deleteGroup = this.deleteGroup.bind(this)
+  }
 
-	componentDidMount() {
-		this.setState({ users: this.props.users.users })
-	}
+  updateDetails(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
-	updateDetails(e) {
-		this.setState({ [e.target.name]: e.target.value })
-	}
+  removeUser(user) {
+    this.setState({
+      people: this.state.people.filter(p => p.id != user.id)
+    })
+  }
 
-	remove(user) {
-		this.setState({
-			people: this.state.people.filter(p => p.id != user.id)
-		})
-	}
+  addUser(user) {
+    let inGroup = false
+    this.state.people.forEach(p => {
+      if (p.id === user.id) inGroup = true
+    })
+    if (inGroup) {
+      alert(`${user.name} is already in this group`)
+      return
+    }
+    else {
+      this.setState({
+        people: [...this.state.people, user]
+      })
+    }
+  }
 
-	handleSubmit(e) {
-		e.preventDefault()
-		// submitty stuff
-	}
+  handleSubmit(e) {
+    e.preventDefault()
 
-	render() {
-		return (
-			<React.Fragment>
-				<div className='column is-12'>
-                    <h1 className='space-below title is-1 has-text-centered'>Set up your groups</h1>
-                </div>
-				
-				{this.props.users.users.length < 1
-					? <React.Fragment>
-						<div className='column is-12'>
-							<p className='has-text-centered'>You need to <Link to='/profile' onClick={() => this.props.goToPeopleTab()}>add some people!!</Link></p>
-						</div>
-						<div className='column is-12'>
-							<img src="http://internationalrescue.com/wp-content/uploads/2014/05/21-international-rescue-illustrator-toby-morris.gif" alt="toby morris's deal with it thingy" />
-							<p>Credit - Toby Morris</p>
-						</div>
-					</React.Fragment>
+  }
 
-					: <React.Fragment>
-						<div className='column is-6'>
-							<form className='form'>
-								<h3 className="title is-3">Add group</h3>
-								{this.props.auth.errorMessage
-									&& <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
-								<hr />
+  deleteGroup(group) {
+    
+  }
 
-								<p>Click users from the list to add them to this group.</p>
-								<label className='label'>Group name
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.users.users.length < 1
+          ? <React.Fragment>
+            <div className='column is-12'>
+              <p className='has-text-centered'>You need to <Link to='/profile' onClick={() => this.props.goToPeopleTab()}>add some people!!</Link></p>
+            </div>
+            <div className='column is-12'>
+              <img src="http://internationalrescue.com/wp-content/uploads/2014/05/21-international-rescue-illustrator-toby-morris.gif" alt="toby morris's deal with it thingy" />
+              <p>Credit - Toby Morris</p>
+            </div>
+          </React.Fragment>
+
+          : <React.Fragment>
+            <div className='column is-12'>
+              <h1 className="title is-1">Add group</h1>
+              {this.props.auth.errorMessage
+                && <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
+            </div>
+
+            <div className='column is-6'>
+              <form className='form'>
+
+                <label className='label'>Group name
 									<input required className="input" placeholder="e.g. the swiss potatoes" type="text" name="name" onChange={this.updateDetails} />
-								</label>
+                </label>
 
-								<label className='label'>People
-									<ul>
-										{this.state.people.map(p => {
-											return <li key={user.id}><Link to='/profile' onClick={() => this.remove(user)}>{p.name}</Link></li>
-										})}
-									</ul>
-								</label>
+                <label className='label'>People</label>
+                <br />
+                {this.state.people.length === 0
+                  ? <React.Fragment>
+                    <p>...</p>
+                  </React.Fragment>
 
-								<h4 className='title is-4'>Total: {this.state.people.length}</h4>
-								<button className='btn btn--stripe btn--radius is-centered' onClick={this.handleSubmit}>SUBMIT</button>
-							</form>
-						</div>
+                  : <React.Fragment>
+                    <p>Click person remove them</p>
+                    {this.state.people.map(p => {
+                      return <li key={p.id}><Link to='/profile' onClick={() => this.removeUser(p)}>{p.name}</Link></li>
+                    })}
+                  </React.Fragment>
+                }
+                <br />
+                <p>Total in group: {this.state.people.length}</p>
+                <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleSubmit}>SUBMIT</button></h1>
+              </form>
+            </div>
+
+            <div className='column is-6'>
+              <p>Click person to add to group</p>
+              {this.props.users.users.map((p) => {
+                return <li key={p.id} onClick={() => this.addUser(p)}><Link to="/profile">{p.name}</Link></li>
+              })}
+            </div>
+          </React.Fragment>
+        }
 
 
-					</React.Fragment>
-				}
+        <div className='column is-12'>
+          <hr />
+          <h1 className='title is-1'>Past groups</h1>
+        </div>
+        <div className='column is-12'>
+          <p>Click group to delete! Be careful, I could not be bothered coding safety measures - it's been a long day</p>
+          {this.props.groups.groups.length === 0
+            ? <React.Fragment>
+              <p>...</p>
+            </React.Fragment>
 
-			</React.Fragment>
-		)
-	}
+            : <React.Fragment>
+              {this.props.groups.groups.map(g => {
+                return <li key={g.id} onClick={() => this.deleteGroup(g)}><Link to="/profile">{g.name}</Link></li>
+              })}
+            </React.Fragment>
+          }
+        </div>
+
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps = ({ auth, users, groups }) => ({ auth, users, groups })
