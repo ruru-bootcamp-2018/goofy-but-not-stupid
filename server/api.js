@@ -22,8 +22,23 @@ function getFullPokiInfo(name) {
         .then(res => {
             return res.body
         })
+        .catch(err => {
+            if (err) throw err
+        })
+}
+
+function getGif() {
+    return request.get('https://api.giphy.com/v1/gifs/random?api_key=dc1xlJCGMtxEQTEaRBIqFWnpbQW2MlOk&tag=funny&rating=G')
+        .then(res => {
+            const url = res.body.data.image_original_url
+            return url
+        })
+        .catch(err => {
+            if (err) throw err
+        })
 }
 
 module.exports = {
-    getPoki
+    getPoki,
+    getGif
 }

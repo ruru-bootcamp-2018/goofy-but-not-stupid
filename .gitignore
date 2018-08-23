@@ -2,3 +2,4 @@ node_modules
 bundle.*
 *.log
 .env
+dev.sqlite3
