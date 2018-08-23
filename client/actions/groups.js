@@ -8,8 +8,7 @@ export function getGroups (account_id) {
             .send({account_id})
             .set('Accept', 'application/json')
             .then(res => {
-                const groups = res.body.groups
-                dispatch(receiveGroups(groups))
+                dispatch(receiveGroups(res.body.groups))
                 return
             })
             .catch(err => {
@@ -35,5 +34,29 @@ function groupsError (message) {
     return {
         type: 'GROUPS_FAILURE',
         message
+    }
+}
+
+export function addGroup(group) {
+    return dispatch => {
+        dispatch(requestGroups())
+        return request
+            .post('/api/v1/groups/add')
+            .send(group)
+            .set('Accept', 'application/json')
+            .then(res => {
+                dispatch(receiveGroup(res.body))
+                return
+            })
+            .catch(err => {
+                dispatch(groupsError(err.response.body.message))
+            })
+    }
+}
+
+function receiveGroup (group) {
+    return {
+        type: 'RECEIVE_GROUP_SUCCESS',
+        group
     }
 }

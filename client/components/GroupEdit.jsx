@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { addGroup } from '../actions/groups'
+
+const initialState = {
+  name: '',
+  people: []
+}
 
 class GroupEdit extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: '',
-      people: []
-    }
+    this.state = {...initialState}
 
     this.updateDetails = this.updateDetails.bind(this)
     this.removeUser = this.removeUser.bind(this)
@@ -45,14 +48,29 @@ class GroupEdit extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    if (this.state.people.length < 2) {
+      this.setState({ errorMessage: 'Group must contain more than one person!' })
+      return
+    } else if (this.state.name === '') { // handle name requirement
+      this.setState({ errorMessage: 'Please give this group a name' })
+      return
+    } else delete this.state.errorMessage
 
+    const group = {
+      account_id: this.props.auth.user.id,
+      name: this.state.name,
+      people: this.state.people
+    }
+    this.props.dispatch(addGroup(group))
+    this.setState({ ...initialState })
   }
 
   deleteGroup(group) {
-    
+
   }
 
   render() {
+    console.log(this.props.groups.groups)
     return (
       <React.Fragment>
         {this.props.users.users.length < 1
@@ -69,8 +87,8 @@ class GroupEdit extends React.Component {
           : <React.Fragment>
             <div className='column is-12'>
               <h1 className="title is-1">Add group</h1>
-              {this.props.auth.errorMessage
-                && <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
+              {this.props.auth.errorMessage && <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
+              {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
             </div>
 
             <div className='column is-6'>
@@ -116,7 +134,7 @@ class GroupEdit extends React.Component {
         </div>
         <div className='column is-12'>
           <p>Click group to delete! Be careful, I could not be bothered coding safety measures - it's been a long day</p>
-          {this.props.groups.groups.length === 0
+          {this.props.groups.groups.length < 1
             ? <React.Fragment>
               <p>...</p>
             </React.Fragment>

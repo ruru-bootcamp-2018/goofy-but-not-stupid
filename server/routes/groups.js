@@ -17,10 +17,10 @@ router.post('/', (req, res) => {
 router.post('/add', (req, res) => {
   let group = req.body
   db.addGroup(group)
-    .then(groupWithId => {
-      group.id = groupWithId.id
+    .then(ids => {
+      group.id = ids[0]
       db.addRelationships(group)
-        .then(() => {
+        .then(_ => {
           res.status(200).json(group)
         })
     })
@@ -32,7 +32,7 @@ router.post('/add', (req, res) => {
 router.post('/edit', (req, res) => {
   const group = req.body
   db.editGroup(group)
-    .then(() => {
+    .then(_ => {
       res.sendStatus(200)
     })
     .catch(err => {
@@ -43,7 +43,7 @@ router.post('/edit', (req, res) => {
 router.post('/del', (req, res) => {
   const id = req.body.id
   db.delGroup(id)
-    .then(() => {
+    .then(_ => {
       res.sendStatus(200)
     })
     .catch(err => {

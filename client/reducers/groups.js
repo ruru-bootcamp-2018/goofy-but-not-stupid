@@ -14,10 +14,12 @@ export default function groups(state = initialState, action) {
                 errorMessage: null
             }
         case 'GROUPS_SUCCESS':
+            console.log(action.groups)
+            // ternary handles no-groups case - the null is a consequence of JSON.parse()
             return {
                 ...state,
                 isFetching: false,
-                groups: action.groups,
+                groups: action.groups[0] === null ? [] : action.groups,
                 fetched: true
             }
         case 'GROUPS_FAILURE':
@@ -28,6 +30,15 @@ export default function groups(state = initialState, action) {
             }
         case 'REMOVE_GROUPS':
             return initialState
+        case 'RECEIVE_GROUP_SUCCESS':
+            let newGroups = state.groups.map(g => g)
+            newGroups.push(action.group)
+            return {
+                ...state,
+                isFetching: false,
+                groups: newGroups,
+                fetched: true
+            }
         default:
             return state
     }
