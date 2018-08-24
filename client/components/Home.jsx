@@ -19,8 +19,10 @@ class Home extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(getUsers(this.props.auth.user.id))
-		this.props.dispatch(getGroups(this.props.auth.user.id))
+		if (this.props.auth.isAuthenticated) {
+			this.props.dispatch(getUsers(this.props.auth.user.id))
+			this.props.dispatch(getGroups(this.props.auth.user.id))
+		}
 	}
 
 	userClick(user) {
