@@ -28,13 +28,15 @@ class HomeTeams extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.users.fetched) {
-            this.props.dispatch(getGroups(this.props.auth.user.id))
-            this.props.dispatch(getUsers(this.props.auth.user.id))
-                .then(() => {
-                    this.setTeams()
-                })
-        } else this.setTeams()
+        if (this.props.auth.isAuthenticated) {
+            if (!this.props.users.fetched) {
+                this.props.dispatch(getGroups(this.props.auth.user.id))
+                this.props.dispatch(getUsers(this.props.auth.user.id))
+                    .then(() => {
+                        this.setTeams()
+                    })
+            } else this.setTeams()
+        }
     }
 
     handleTeamAmountChange(e) {
@@ -95,7 +97,7 @@ class HomeTeams extends React.Component {
             alert(`Nope! Each team must have at least 2 people`)
             return
         }
-        
+
         // making sure numbers add up
         let totalMaxes = this.state.preprocessedTeams.reduce((acc, i) => acc + i.max, 0)
         if (totalMaxes != users.length) {

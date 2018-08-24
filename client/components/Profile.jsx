@@ -17,9 +17,11 @@ class Profile extends React.Component {
 	}
 
 	componentDidMount() {
-		if (!this.props.users.fetched) {
-            this.props.dispatch(getGroups(this.props.auth.user.id))
-			this.props.dispatch(getUsers(this.props.auth.user.id))
+		if (this.props.auth.isAuthenticated) {
+			if (!this.props.users.fetched) {
+				this.props.dispatch(getGroups(this.props.auth.user.id))
+				this.props.dispatch(getUsers(this.props.auth.user.id))
+			}
 		}
 	}
 
