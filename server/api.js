@@ -28,9 +28,9 @@ function getFullPokiInfo(name) {
 }
 
 function getGif() {
-    return request.get('https://api.giphy.com/v1/gifs/random?api_key=dc1xlJCGMtxEQTEaRBIqFWnpbQW2MlOk&tag=funny&rating=G')
+    return request.get('https://api.giphy.com/v1/gifs/trending?api_key=dc1xlJCGMtxEQTEaRBIqFWnpbQW2MlOk&limit=25&rating=G')
         .then(res => {
-            const url = res.body.data.image_original_url
+            const url = res.body.data[Math.floor(Math.random()*res.body.data.length)].images.original.url
             return url
         })
         .catch(err => {

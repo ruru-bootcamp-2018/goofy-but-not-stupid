@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken')
 const db = require('../db')
 
-///
-
 function issue(req, res) {
     db.getAccountByUsername(req.body.username)
         .then(account => {

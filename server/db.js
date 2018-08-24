@@ -7,23 +7,6 @@ function getUsers(account_id) {
     .where({ account_id })
 }
 
-// function getUser(name) {
-//   return db('users').select().where({ name }).first()
-// }
-
-// function getUserData (name) {
-//   let userData = {}
-//   return getUser(name)
-//     .then((userInfo) => {
-//       userData = userInfo
-//       return getUserRelationships(userData.id)
-//         .then((relationships) => {
-//           userData.relationships = relationships
-//           return userData;
-//         })
-//     })
-//   }
-
 function addUser(user) {
   if (user.profile_pic === '') user.profile_pic = 'images/bone-ice-cream-detail_2.jpg'
   return db('users')
@@ -124,21 +107,6 @@ function tickUpRelationship(rel) {
     .update({count})
 }
 
-// function getUserRelationships(id) {
-//   return db('relationships')
-//     .where('id_one', id)
-//     .orWhere('id_two', id)
-// }
-
-// function accountExists(account) {
-//   return db('accounts')
-//     .where(account)
-//     .then(accountOrNot => {
-//       // TODO: double check
-//       if (accountOrNot) return true; else return false
-//     })
-// }
-
 function getAccountByUsername(username) {
   return db('accounts')
     .where({ username })
@@ -152,8 +120,6 @@ function createAccount(account) {
 
 module.exports = {
   getUsers,
-  // getUser,
-  // getUserData,
   addUser,
   editUser,
   delUser,
@@ -163,8 +129,6 @@ module.exports = {
   delGroup,
   getRelationships,
   addRelationships,
-  // getUserRelationships,
-  // accountExists,
   getAccountByUsername,
   createAccount
 }

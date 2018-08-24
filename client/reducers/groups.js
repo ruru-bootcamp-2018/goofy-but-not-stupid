@@ -14,7 +14,6 @@ export default function groups(state = initialState, action) {
                 errorMessage: null
             }
         case 'GROUPS_SUCCESS':
-            console.log(action.groups)
             // ternary handles no-groups case - the null is a consequence of JSON.parse()
             return {
                 ...state,
