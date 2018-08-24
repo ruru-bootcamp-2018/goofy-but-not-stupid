@@ -140,7 +140,7 @@ class PeopleEdit extends React.Component {
                                 </label>
                                 <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
                                 <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleEdit}>SUBMIT</button></h1>
-                                <p className='has-text-centered'><Link to='profile' onClick={this.backToAdd}>Back to adding users</Link></p>
+                                <p className='has-text-centered'><Link to='profile' onClick={this.backToAdd}>Cancel</Link></p>
                             </form>
                         </div>
                     </React.Fragment>
