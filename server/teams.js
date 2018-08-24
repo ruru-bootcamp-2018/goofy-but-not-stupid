@@ -54,7 +54,7 @@ function addPairingCounts(teams, relationships) {
         let rel = relationships.find(r => {
           return ((r.id_one == team.team[i].id && r.id_two == team.team[j].id) || (r.id_one == team.team[j].id && r.id_two == team.team[i].id))
         })
-        team.pairingCount += rel.count
+        if (!!rel.count) team.pairingCount += rel.count
       }
     }
   })

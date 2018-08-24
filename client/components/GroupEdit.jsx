@@ -70,7 +70,6 @@ class GroupEdit extends React.Component {
   }
 
   render() {
-    console.log(this.props.groups.groups)
     return (
       <React.Fragment>
         {this.props.users.users.length < 1
