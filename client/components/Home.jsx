@@ -44,7 +44,7 @@ class Home extends React.Component {
 
 				<div className='columns'>
 					<div className='column is-3'>
-						<h1 className='title is-1'>People</h1>
+						<h3 className='title is-3'>People</h3>
 						{users.length > 0 
 							?
 								users.map((user) => {

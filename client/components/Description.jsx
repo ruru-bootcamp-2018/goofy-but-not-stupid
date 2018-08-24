@@ -4,7 +4,7 @@ const Description = (props) => (
     <React.Fragment>
         <div className='columns first'>
             <div className='column is-12'>
-                <h1 className='title is-1'>Team builder v3</h1>
+                <h1 className='title is-1'>Team builder</h1>
                 <p>Makes better teams for group projects where people are paired up with the least people they have worked with before in past projects.</p>
                 <p>App is now account-based with full account building functionality. You're able to costomise a list of all team-members, input past project pairing history and dynamically generate the best possible team structure for them. 🚀🚀🚀.</p>
                 <li>Select team members from left hand list for more info.</li>
