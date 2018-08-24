@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getTeams } from '../apiClient'
 import { getUsers } from '../actions/users'
 import { getGroups } from '../actions/groups'
@@ -107,7 +107,7 @@ class HomeTeams extends React.Component {
         }
     }
 
-    acceptTeams () {
+    acceptTeams() {
         alert("TODO: will add these groups to an account's group history so it takes it into account next time")
     }
 
@@ -118,32 +118,39 @@ class HomeTeams extends React.Component {
             return (
                 <React.Fragment>
                     <BackToHomeButton />
-                    <form className='form'>
-                        <div className='columns is-centered'>
-                            <div className='column is-6'>
-                                <h5 className='title is-5'>How many teams would you like?</h5>
-                                <input required className='input' type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
-                                <br/><br/>
-                                <h5 className='title is-5'>How many people per team?</h5>
-                                {this.state.preprocessedTeams.map((team, i) => {
-                                    return (
-                                        <div key={`input${i + 1}`}>
-                                            <label>Team {i + 1}
-                                                <input className='input' type="number" name={i} onChange={this.handleTeamNumberChange}
-                                                    value={this.state.preprocessedTeams[i].max} />
-                                            </label>
-                                        </div>
-                                    )
-                                })}
+                    {this.props.users.users.length > 0
+                        ? 
+                            <form className='form'>
+                                <div className='columns is-centered'>
+                                    <div className='column is-6'>
+                                        <h5 className='title is-5'>How many teams would you like?</h5>
+                                        <input required className='input' type="number" name='teamAmount' onChange={this.handleTeamAmountChange} value={this.state.teamAmount} />
+                                        <br /><br />
+                                        <h5 className='title is-5'>How many people per team?</h5>
+                                        {this.state.preprocessedTeams.map((team, i) => {
+                                            return (
+                                                <div key={`input${i + 1}`}>
+                                                    <label>Team {i + 1}
+                                                        <input className='input' type="number" name={i} onChange={this.handleTeamNumberChange}
+                                                            value={this.state.preprocessedTeams[i].max} />
+                                                    </label>
+                                                </div>
+                                            )
+                                        })}
 
-                            </div>
-                        </div>
-                        <div className='columns'>
-                            <div className='column is-12'>
-                                <h1 className='title is-1'><button className='btn btn--stripe btn--radius centered btn--large' onClick={this.handleSubmit}>SUBMIT</button></h1>
-                            </div>
-                        </div>
-                    </form>
+                                    </div>
+                                </div>
+                                <div className='columns'>
+                                    <div className='column is-12'>
+                                        <h1 className='title is-1'><button className='btn btn--stripe btn--radius centered btn--large' onClick={this.handleSubmit}>SUBMIT</button></h1>
+                                    </div>
+                                </div>
+                            </form>
+
+                        :
+                            <p className='has-text-centered'>You need to <Link to='/profile'>add some people before making teams!!</Link></p>
+
+                    }
                     <Footer />
                 </React.Fragment>
             )
@@ -156,14 +163,14 @@ class HomeTeams extends React.Component {
                 <div className='columns is-multiline'>
                     {
                         this.state.teams &&
-                        <Teams teams={this.state.teams} teamNumber={this.state.teamNumber}/>
+                        <Teams teams={this.state.teams} teamNumber={this.state.teamNumber} />
                     }
                 </div>
-                <hr/>
+                <hr />
                 <div className='has-text-centered'>
 
                     <Link to='#' onClick={this.acceptTeams}>Yesss! Accept teams</Link>
-                    <br/><br/>
+                    <br /><br />
                     <Link to='#' onClick={this.handleSubmit}>Make new teams</Link>
                 </div>
 
