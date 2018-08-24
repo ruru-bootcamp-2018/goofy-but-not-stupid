@@ -2,6 +2,7 @@ import request from 'superagent'
 
 import {receiveLogin} from './login'
 import {saveUserToken} from '../utils/auth'
+import { navigateTo } from './nav';
 
 export function registerUserRequest(creds) {
     return (dispatch) => {
@@ -13,6 +14,7 @@ export function registerUserRequest(creds) {
             .then(res => {
                 const userInfo = saveUserToken(res.body.token) 
                 dispatch(receiveLogin(userInfo))
+                dispatch(navigateTo('#/profile'))
                 goToProfile()
             })
             .catch(err => {

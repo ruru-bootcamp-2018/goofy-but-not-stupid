@@ -101,7 +101,7 @@ class HomeTeams extends React.Component {
         // making sure numbers add up
         let totalMaxes = this.state.preprocessedTeams.reduce((acc, i) => acc + i.max, 0)
         if (totalMaxes != users.length) {
-            alert(`Nope! The total amount of people in those teams is ${totalMaxes}. Please make this add up to the total amount of people in your cohort, ${users.length}.`)
+            alert(`Nope! The total amount of people in those teams is ${totalMaxes}. Please make this add up to the total amount of people on your account: ${users.length}.`)
             return
         } else {
 
