@@ -3,18 +3,18 @@ import React from 'react'
 const Description = (props) => (
     <React.Fragment>
         <div className='columns first'>
-            <div className='column is-6'>
-                <h3 className='title is-3'>Team builder</h3>
-                <p>Makes better teams for EDA group projects where everyone is paired with the least people they have worked with before in past projects.</p>
-                <p>Currently only set up for our mid-2018 EDA cohort tracking our group pairing history.</p>
-                <ul>
-                    <li>Select cohort members from left hand list for more info.</li>
-                    <li>When you're ready to generate teams, hit the button, select how amount of teams and number split and go!</li>
-                </ul>
-            </div>
-            <div className='column is-6'>
-                <h3 className='title is-3'>Up next...</h3>
-                <p>By late August, this site will be account-based. After you login, you'll have the ability to create a new list of team-members, input past project pairing history and dynamically generate the best possible team structure for them. 🚀🚀🚀</p>
+            <div className='column is-12'>
+                <h1 className='title is-1'>Team builder</h1>
+                <p>Makes better teams for group projects where people are paired up with the least people they have worked with before in past projects.</p>
+                <p>App is now account-based with full account building functionality. You're able to costomise a list of all team-members, input past project pairing history and dynamically generate the best possible team structure for them. 🚀🚀🚀.</p>
+                <li>Select team members from left hand list for more info.</li>
+                <li>When you're ready to generate teams, hit the button, select the amount of teams and the number split and go!</li>
+                <br/><br/>
+                <p><strong>If you're setting up your account from scratch:</strong></p>
+                <li>Select 'edit profile' from the top nav.</li>
+                <li>Add all your people in the people tab top left.</li>
+                <li>Once you've got some people, add any past group history in the group tab that you want the app to take into account when generating shiny new groups.</li>
+                <li>Make some groups!</li>
             </div>
         </div>
     </React.Fragment>

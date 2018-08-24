@@ -28,7 +28,7 @@ class Login extends React.Component {
 		const { auth } = this.props
 		return (
 			<div className='columns is-centered'>
-				<div className='column is-4'>
+				<div className='column is-5'>
 					<form className='form'>
 						<h1 className="title is-1 has-text-centered">LOGIN</h1>
 						{auth.errorMessage

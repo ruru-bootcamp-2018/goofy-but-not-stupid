@@ -108,7 +108,7 @@ class PeopleEdit extends React.Component {
                                 <label className='label'>Key phrase
                             <input className='input' type="text" name='phrase' value={this.state.phrase} onChange={this.updateDetails} />
                                 </label>
-                                <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
+                                <p className='small-space'>If you don't give them a profile pic, a random gif will be used - hopefully it will be awesome.</p>
                                 <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleAdd}>SUBMIT</button></h1>
                             </form>
                         </div>
@@ -138,9 +138,9 @@ class PeopleEdit extends React.Component {
                                 <label className='label'>Key phrase
                             <input className='input' type="text" name='phrase' value={this.state.phrase} onChange={this.updateDetails} />
                                 </label>
-                                <p className='small-space'>If you don't give them a profile pic, a placeholder will be used - it will be awesome.</p>
+                                <p className='small-space'>If you don't give them a profile pic, a random gif will be used - hopefully it will be awesome.</p>
                                 <h1 className='title is-1'><button className='small-space btn btn--stripe btn--radius centered btn--large' onClick={this.handleEdit}>SUBMIT</button></h1>
-                                <p className='has-text-centered'><Link to='profile' onClick={this.backToAdd}>Back to adding users</Link></p>
+                                <p className='has-text-centered'><Link to='profile' onClick={this.backToAdd}>Cancel</Link></p>
                             </form>
                         </div>
                     </React.Fragment>
