@@ -2,11 +2,35 @@
 
 https://the-sorting-hat.herokuapp.com/
 
-A web app to make better teams for EDA group projects where everyone is paired with the least people they have worked with before in past projects.
+Makes better teams for group projects where people are paired up with the least people they have worked with before in past projects.
 
-Currently only set up for our mid-2018 EDA cohort tracking our group pairing history.
-- Select cohort members from the homepage list for more info. Currently querying the pokemon API (https://pokeapi.co/) to generate a special ability for each member for the funnies.
-- When you're ready to generate teams, hit the button, select how amount of teams and the number split among those teams and go! The team creation code will generate 100 teams in the configuration you requested, compare them on a number of axis and return the top one.
+App is now account-based with full account building functionality. You're able to costomise a list of all team-members, input past project pairing history and dynamically generate the best possible team structure for them. 🚀🚀🚀.
 
-### Up next...
-By late August, the app will be account-based so it can be used by any group. After you login, you'll have the ability to create a list of all your group members, input past project pairing history and dynamically generate the fairest possible team structure for you all so you get to work with the most new people. 🚀🚀🚀
+- Select team members from left hand list for more info.
+- When you're ready to generate teams, hit the button, select the amount of teams and the number split and go!
+
+If you're setting up your account from scratch:
+
+- Select 'edit profile' from the top nav.
+- Add all your people in the people tab top left.
+- Once you've got some people, add any past group history in the group tab that you want the app to take into account when generating shiny new groups.
+- Make some groups!
+
+## Tech:
+React / Redux front-end using:
+- Thunk and Superagent for async redux server requests
+- HashRouter for client-side routing
+- Webpack
+- Bulma CSS framework
+- A shitload of ternaries...
+
+Node Express / Knex back-end using:
+- jsonwebtoken for account token generation
+- bcrypt for password hashing
+- sqlite3 dev db environment
+- https://pokeapi.co/ for people's special abilities because why not
+- https://developers.giphy.com/ for placeholder profile gifs
+- ze most complicated algorithm i've come up with yet to generate 100 possible team configurations, compare on two axis and deliver the best one
+- Toby Morris's art because it's awesome
+
+Deployed on Heroku - running postgresql production environment
