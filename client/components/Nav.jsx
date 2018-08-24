@@ -5,7 +5,6 @@ import { logoutUser } from '../actions/logout'
 import {navigateTo} from '../actions/nav'
 
 const Nav = (props) => {
-    console.log(document.location.hash)
     return (
         <div className='columns first'>
             <div className='column is-12'>
