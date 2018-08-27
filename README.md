@@ -16,7 +16,13 @@ If you're setting up your account from scratch:
 - Once you've got some people, add any past group history in the group tab that you want the app to take into account when generating shiny new groups.
 - Make some groups!
 
-## Tech:
+<img src='screen2.PNG' />
+<img src='screen1.PNG' />
+<img src='screen3.PNG'>
+
+------------------------
+
+### Tech:
 React / Redux front-end using:
 - Thunk and Superagent for async redux server requests
 - HashRouter for client-side routing
