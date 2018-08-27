@@ -42,6 +42,14 @@ class Profile extends React.Component {
 			<React.Fragment>
 				<div className='columns is-multiline'>
 					<div className='column is-12'>
+						<div className='columns is-centered'>
+							<div className='column is-8'>
+								<h1 className='title is-1 has-text-centered'>Set up your account</h1>
+								<p className='has-text-centered'>Make sure your account is up to date with all past group history you want the app to take into account, and all people you want to include when generating new groups.</p>
+							</div>
+						</div>
+					</div>
+					<div className='column is-12'>
 						<div className="tabs is-boxed is-left">
 							<ul>
 								<li className={`${this.state.tab == 'groups' && 'is-active'}`} onClick={this.switchTabs}>

@@ -85,7 +85,7 @@ class GroupEdit extends React.Component {
 
           : <React.Fragment>
             <div className='column is-12'>
-              <h1 className="title is-1">Add group</h1>
+              <h2 className="title is-2">Add a past group</h2>
               {this.props.auth.errorMessage && <p className="has-text-centered">{this.props.groups.errorMessage}</p>}
               {this.state.errorMessage && <p className='has-text-danger'>{this.state.errorMessage}!</p>}
             </div>
@@ -129,7 +129,7 @@ class GroupEdit extends React.Component {
 
         <div className='column is-12'>
           <hr />
-          <h1 className='title is-1'>Past groups</h1>
+          <h2 className='title is-2'>All Past Groups</h2>
         </div>
         <div className='column is-12'>
           <p>Click group to delete! Be careful, I could not be bothered coding safety measures - it's been a long day</p>
