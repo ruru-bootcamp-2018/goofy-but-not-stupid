@@ -87,7 +87,7 @@ class PeopleEdit extends React.Component {
                 {this.state.addingUser &&
                     <React.Fragment>
                         <div className='column is-12'>
-                            <h1 className='title is-1'>Add person</h1>
+                            <h2 className='title is-2'>Add a person</h2>
                         </div>
 
                         <div className='column is-6'>
@@ -118,7 +118,7 @@ class PeopleEdit extends React.Component {
                 {this.state.editingUser &&
                     <React.Fragment>
                         <div className='column is-12'>
-                            <h1 className='title is-1'>Edit {this.state.name}</h1>
+                            <h2 className='title is-2'>Edit {this.state.name}</h2>
                         </div>
                         <div className='column is-6'>
                             <form className='form'>
