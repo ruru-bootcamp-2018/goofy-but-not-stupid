@@ -18,7 +18,7 @@ If you're setting up your account from scratch:
 
 <img src='screen2.PNG' />
 <img src='screen1.PNG' />
-<img src='screen3.PNG'>
+<img src='scrren3.PNG'>
 
 ------------------------
 
