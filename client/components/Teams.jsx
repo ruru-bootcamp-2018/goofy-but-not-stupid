@@ -11,7 +11,6 @@ class Teams extends React.Component {
   }
 
   render() {
-    console.log(this.props.teams)
     return (
       <React.Fragment>
         {this.props.teamNames.length == this.props.teams.length && this.props.teams.map((teamObj, i) => {
