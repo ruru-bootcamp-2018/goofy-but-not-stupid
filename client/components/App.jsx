@@ -7,6 +7,7 @@ import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
 import Profile from './Profile'
+import PreviousTeams from './PreviousTeams'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path='/teams' component={HomeTeams} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/previousTeams' component={PreviousTeams} />
       </div>
     </Router>
   )
