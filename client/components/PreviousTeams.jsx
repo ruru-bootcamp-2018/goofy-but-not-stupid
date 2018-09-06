@@ -12,7 +12,10 @@ class PreviousTeams extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            groups: []
+            groups: [],
+            currentGroup: {
+              people: []
+            }
         }
       this.findGroup = this.findGroup.bind(this)
     }
@@ -32,10 +35,21 @@ class PreviousTeams extends React.Component {
         return (
             <React.Fragment>
               <BackToHomeButton />
-                <div className="columns is-multiline">
+                <div>
                   <ul>
                   {groups.map(group => <li key={group.name}><a><h4>{group.name}</h4></a></li>)}
                   </ul>
+                </div>
+
+                <div className="columns is-multiline">
+                  {this.state.currentGroup && this.state.currentGroup.people.map(person => {
+                      return (
+                        <div key={person.name} className="column is-4">
+                          <h3>{person.name}</h3>
+                          <img className="profilePic" src={person.profile_pic} />
+                        </div>
+                      )
+                  })}
                 </div>
               <Footer />
             </React.Fragment>
