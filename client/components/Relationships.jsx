@@ -21,15 +21,30 @@ class Relationships extends React.Component {
 
     render() {
       const users = this.props.users.users
-      console.log(users, this.props.users);
         return (
             <React.Fragment>
               <h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">&larr;---------------</button></Link></h1>
                 <div>
                   <h4 className="title is-2 has-text-centered">Peeps you've worked with before</h4>
-                  <ul>
-                  {this.state.users && users.map(user => <li key={user.name}><h4>{user.name}</h4></li>)}
-                  </ul>
+                    <div className="columns">
+                      <ul className="column is-6">
+                        <h3 className="title is-3">Peers</h3>
+                        {users.map(user => {
+                          return (
+                            <div>
+                              <li key={user.name}><h4>{user.name}</h4></li>
+                              <hr />
+                            </div>
+                          )
+                        })}
+
+                      </ul>
+                      <ul className="column is-6">
+                        <h3 className="title is-3">The official count</h3>
+                        <p>where relationship map goes</p>
+                        <hr />
+                      </ul>
+                    </div>
                 </div>
 
               <Footer />
