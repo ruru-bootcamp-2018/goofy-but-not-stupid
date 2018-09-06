@@ -27,7 +27,10 @@ class PreviousTeams extends React.Component {
     }
 
     findGroup(name) {
-
+      let current = this.props.groups.groups.filter(groups => name == groups.name)
+      this.setState({
+        currentGroup: current[0]
+      })
     }
 
     render() {
@@ -36,8 +39,9 @@ class PreviousTeams extends React.Component {
             <React.Fragment>
               <BackToHomeButton />
                 <div>
+                  <h4 className="title is-2 has-text-centered">Click team name to see members</h4>
                   <ul>
-                  {groups.map(group => <li key={group.name}><a><h4>{group.name}</h4></a></li>)}
+                  {groups.map(group => <li key={group.name}><a onClick={() => this.findGroup(group.name)}><h4>{group.name}</h4></a></li>)}
                   </ul>
                 </div>
 
