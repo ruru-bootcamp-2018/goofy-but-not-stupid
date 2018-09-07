@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUsers } from '../actions/users'
-import { getRelationships } from '../action/relationships'
+import { getRelationships } from '../actions/relationships'
 
 import Footer from './Footer'
 
@@ -17,7 +17,7 @@ class Relationships extends React.Component {
 
     componentDidMount() {
       this.setState({
-        users: this.props.dispatch(getUsers(this.props.auth.user.id))
+        users: this.props.dispatch(getUsers(this.props.auth.user.id)),
         relationships: this.props.dispatch(getRelationships(this.props.auth.user.id))
       })
     }
