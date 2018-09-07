@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth')
 const teamsRoutes = require('./routes/teams')
 const apiRoutes = require('./routes/api')
 const groupsRoutes = require('./routes/groups')
+const relationshipsRoutes = require('./routes/relationships')
 
 const server = express()
 
@@ -18,5 +19,6 @@ server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/teams', teamsRoutes)
 server.use('/api/v1/api', apiRoutes)
 server.use('/api/v1/groups', groupsRoutes)
+server.use('/api/v1/relationships', relationshipsRoutes)
 
 module.exports = server

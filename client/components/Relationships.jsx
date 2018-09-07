@@ -25,14 +25,14 @@ class Relationships extends React.Component {
             <React.Fragment>
               <h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">&larr;---------------</button></Link></h1>
                 <div>
-                  <h4 className="title is-2 has-text-centered">Peeps you've worked with before</h4>
+                  <h4 className="title is-2 has-text-centered">How many times have these pairs happened really?</h4>
                     <div className="columns">
                       <ul className="column is-6">
-                        <h3 className="title is-3">Peers</h3>
+                        <h3 className="title is-3">List of {this.props.auth.user.username}'s people</h3>
                         {users.map(user => {
                           return (
-                            <div>
-                              <li key={user.name}><h4>{user.name}</h4></li>
+                            <div key={user.name}>
+                              <li><h4>{user.name}</h4></li>
                               <hr />
                             </div>
                           )
