@@ -64,6 +64,7 @@ function delGroup(id) {
 }
 
 function getRelationships(account_id) {
+console.log(account_id);
   return db('relationships')
     .where({ account_id })
 }
