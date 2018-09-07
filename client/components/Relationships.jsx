@@ -45,6 +45,7 @@ class Relationships extends React.Component {
       username = username.charAt(0).toUpperCase() + username.substring(1, username.length)
       let titleString = this.state.filtered ? `${this.state.clickedUser.name}'s matches` : `List of ${username}'s people`
       let show = this.state.filtered ? 'title is-4' : 'is-hidden title is-4'
+
         return (
             <React.Fragment>
               <h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">&larr;---------------</button></Link></h1>
@@ -69,9 +70,10 @@ class Relationships extends React.Component {
                           <ul className="columns is-multiline">
                            {this.state.currentCounts && this.state.currentCounts.map(match => {
                             let notCurrentUser = (match.id_one == this.state.clickedUser.id) ? match.id_two : match.id_one
+                            let pair = match.count > 1 ? 'pairings' : match.count == 0 ? 'pairings' : 'pair'
                               return (
                                 <div className="column is-2" key={match.id}>
-                                  <li>{match.count} pairings with group member {notCurrentUser}</li>
+                                  <li>{match.count} {pair} with group member {notCurrentUser}</li>
                                 </div>
                               )
                             })}
