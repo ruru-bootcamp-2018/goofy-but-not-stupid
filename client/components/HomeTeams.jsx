@@ -170,7 +170,10 @@ class HomeTeams extends React.Component {
                                     })}
 
                                 </div>
-                              <Link to='/previousTeams'>See list of previous teams</Link>
+                              <ul>
+                                <li><Link to='/previousTeams'>See list of previous teams</Link></li>
+                                <li><Link to='/relationships'>See list of your pairings</Link></li>
+                              </ul>
                             </div>
                             <div className='columns'>
                                 <div className='column is-12'>

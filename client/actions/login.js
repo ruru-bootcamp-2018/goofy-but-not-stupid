@@ -3,7 +3,7 @@ import { saveUserToken } from '../utils/auth'
 
 export function loginUser(creds) {
     return dispatch => {
-        dispatch(requestLogin())
+        dispatch(requestLogin(creds))
         return request
             .post('/api/v1/auth/login')
             .send(creds)

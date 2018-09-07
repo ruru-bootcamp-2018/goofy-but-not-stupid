@@ -5,7 +5,6 @@ import { getTeams } from '../apiClient'
 import { getUsers } from '../actions/users'
 import { getGroups, addGroup } from '../actions/groups'
 
-import BackToHomeButton from './BackToHomeButton'
 import Footer from './Footer'
 
 class PreviousTeams extends React.Component {
@@ -37,7 +36,7 @@ class PreviousTeams extends React.Component {
       const groups = this.props.groups.groups
         return (
             <React.Fragment>
-              <BackToHomeButton />
+              <h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">&larr;---------------</button></Link></h1>
                 <div>
                   <h4 className="title is-2 has-text-centered">Click team name to see members</h4>
                   <ul>
