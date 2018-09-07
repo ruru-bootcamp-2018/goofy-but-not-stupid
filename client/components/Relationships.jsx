@@ -21,6 +21,8 @@ class Relationships extends React.Component {
 
     render() {
       const users = this.props.users.users
+      let username = this.props.auth.user.username
+      username = username.charAt(0).toUpperCase() + username.substring(1, username.length)
         return (
             <React.Fragment>
               <h1 className='title is-1'><Link to='/teams'><button className="btn btn--stripe btn--radius centered btn--large">&larr;---------------</button></Link></h1>
@@ -28,7 +30,7 @@ class Relationships extends React.Component {
                   <h4 className="title is-2 has-text-centered">How many times have these pairs happened really?</h4>
                     <div className="columns">
                       <ul className="column is-6">
-                        <h3 className="title is-3">List of {this.props.auth.user.username}'s people</h3>
+                        <h3 className="title is-3">List of {username}s people</h3>
                         {users.map(user => {
                           return (
                             <div key={user.name}>
