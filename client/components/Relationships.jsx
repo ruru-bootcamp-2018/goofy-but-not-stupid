@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUsers } from '../actions/users'
+import { getRelationships } from '../action/relationships'
 
 import Footer from './Footer'
 
@@ -9,13 +10,15 @@ class Relationships extends React.Component {
     constructor(props) {
       super(props)
         this.state = {
-            users: []
+            users: [],
+            relationships: []
         }
     }
 
     componentDidMount() {
       this.setState({
         users: this.props.dispatch(getUsers(this.props.auth.user.id))
+        relationships: this.props.dispatch(getRelationships(this.props.auth.user.id))
       })
     }
 
@@ -55,5 +58,5 @@ class Relationships extends React.Component {
     }
   }
 
-  const mapStateToProps = ({ auth, users }) => ({ auth, users })
+  const mapStateToProps = ({ auth, users, relationships }) => ({ auth, users, relationships })
   export default connect(mapStateToProps)(Relationships)
